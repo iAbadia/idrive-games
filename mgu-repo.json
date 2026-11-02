@@ -45,6 +45,21 @@
       "mguHmi": [
         "ID7"
       ]
+    },
+    {
+      "id": "iabadia_tetris",
+      "kind": "app",
+      "path": "apps/iabadia_tetris",
+      "build": "unit",
+      "title": "Tetris",
+      "description": "Falling blocks with rotary movement, ghost pieces, seven-bag randomization and saved scores",
+      "requires": {
+        "mgu-render": "0.6.9"
+      },
+      "uninstallable": true,
+      "mguHmi": [
+        "ID7"
+      ]
     }
   ]
 }

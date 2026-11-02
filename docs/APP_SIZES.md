@@ -4,6 +4,7 @@ Measured 2 November 2026. KiB = 1,024 bytes; MiB = 1,048,576 bytes.
 
 | App | Version | Compressed source package | Unpacked source |
 | --- | --- | ---: | ---: |
+| Tetris | 0.1.0 | ~135 KiB | ~272 KiB |
 | Snake | 0.1.1 | ~154 KiB | ~289 KiB |
 | Minesweeper | 0.1.2 | ~156 KiB | ~295 KiB |
 | 2048 | 0.1.3 | ~231 KiB | ~402 KiB |
@@ -13,7 +14,7 @@ Measured 2 November 2026. KiB = 1,024 bytes; MiB = 1,048,576 bytes.
 Our sizes come from `npm run build` and `npm run size`. Comparison download
 sizes come from the published [idrive-apps catalog](https://github.com/robertnisipeanu/idrive-apps/releases/tag/catalog)
 and [mgu-store catalog](https://github.com/robertnisipeanu/mgu-store/releases/tag/catalog).
-All five entries use source packages built on the head unit. Waze's native
+All six entries use source packages built on the head unit. Waze's native
 map tool and cluster renderer are separate dependencies and are not included
 in its small app package. Likewise, our renderer is an existing shared tool,
 not duplicated in each game.
@@ -47,3 +48,5 @@ Minesweeper 0.1.2 uses a richer reference-based launcher icon (about 23 KiB). On
 2048 0.1.3 adds a reference-inspired gold launcher tile (about 20 KiB PNG), retaining the optimized font subset.
 
 Snake reuses the small Minesweeper font subset and ships a small padded launcher icon, with no third-party game engine or runtime npm packages.
+
+Tetris uses the same small font subset and shared renderer. Its game rules, next-piece preview and ghost outline add no external engine or npm runtime dependencies.

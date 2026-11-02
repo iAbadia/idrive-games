@@ -1,0 +1,19 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+'use strict';
+const fs=require('fs'),path=require('path');
+const {Session}=require('../src/session.js');
+const {draw,WIDTH,HEIGHT}=require('../src/draw.js');
+const {Canvas}=require('../src/kit_canvas.js');
+const {play}=require('../src/kit_record.js');
+function png(s){return play(draw(s).words(),new Canvas(WIDTH,HEIGHT)).png();}
+function samples(){
+    const s=new Session(null,{random:()=>0.47});s.visibility(true);
+    s.game.board.fill(0);for(let y=16;y<20;y++)for(let x=0;x<10;x++)if(x!==5&&((x+y)%7!==0))s.game.board[y*10+x]=1+(x+y)%7;
+    s.game.piece={kind:'T',rot:0,x:4,y:8};s.game.score=1240;s.game.lines=8;s.game.best.classic=2400;s.game.status='playing';s.stamp=s.now();
+    const out=path.join(__dirname,'../preview');fs.mkdirSync(out,{recursive:true});fs.writeFileSync(path.join(out,'game.png'),png(s));
+    s.input('back');fs.writeFileSync(path.join(out,'menu.png'),png(s));
+    const tree=require('../mgu-app.json').tree;
+    fs.copyFileSync(path.join(__dirname,'../assets/icon.png'),path.join(__dirname,'..',tree,'rhmiData/variantGroups/Common/images/iabadia_tetris_icon.png'));
+    console.log(out);
+}
+module.exports={png};if(require.main===module)samples();
