@@ -1,3 +1,5 @@
+<p><img src="assets/icon.png" alt="Minesweeper icon" width="96" height="96"></p>
+
 # Minesweeper
 
 Classic Minesweeper for iDrive 7, with a dark interface and controller input.

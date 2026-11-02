@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1
+
+- Use reference-based blue launcher artwork with transparent safe padding.
+
 ## 0.1.0
 
 - Falling blocks with seven-bag randomization, three next pieces and ghost landing preview.

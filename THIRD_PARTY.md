@@ -8,4 +8,4 @@ Repository branding and game screenshots use this project's own assets and synth
 
 Snake uses the same drawing kit, renderer client and Inter font subset as Minesweeper; the corresponding MIT and OFL notices are retained in its staged tree. Its launcher icon is adapted from user-supplied artwork.
 
-Tetris uses the same drawing kit, renderer client and Inter font subset, with their MIT and OFL notices retained. Game rules and launcher artwork are original code. No commercial game assets are bundled.
+Tetris uses the same drawing kit, renderer client and Inter font subset, with their MIT and OFL notices retained. Game rules are original code; the launcher icon is adapted from user-supplied artwork. No commercial game assets are bundled.

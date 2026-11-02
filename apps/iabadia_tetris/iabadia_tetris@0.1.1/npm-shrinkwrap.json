@@ -1,6 +1,6 @@
 {
-  "name": "iabadia_minesweeper",
-  "version": "0.1.2",
+  "name": "iabadia_tetris",
+  "version": "0.1.1",
   "lockfileVersion": 1,
   "requires": true,
   "dependencies": {}

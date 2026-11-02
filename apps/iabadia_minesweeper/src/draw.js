@@ -32,9 +32,13 @@ function draw(session, now) {
         if (!open) r.line(x+2,y+1,x+size-2,y+1,1,'#525863');
         const cx=x+size/2, cy=y+size/2;
         if ((g.flags[i] || (g.status==='won' && mine)) && !open) {
-            r.line(cx-3,cy+7,cx-3,cy-8,2,'#eee4da');
-            r.fillRect(cx-2,cy-8,Math.max(6,size*.3),Math.max(5,size*.23),'#edcf72');
-            r.line(cx-7,cy+8,cx+5,cy+8,2,'#eee4da');
+            const pole=cx-size*.12, top=cy-size*.27, bottom=cy+size*.25;
+            const width=size*.38, height=size*.28;
+            r.line(pole,top,pole,bottom,2,'#eee4da');
+            // Four convex points, the last on the pole, describe a triangular pennant.
+            r.quad([[pole,top],[pole+width,top+height/2],[pole,top+height],[pole,top+height/2]],'#f44747');
+            r.line(pole,top,pole+width,top+height/2,1,'#ff8c7c');
+            r.line(pole-size*.13,bottom,pole+size*.13,bottom,2,'#eee4da');
             if (g.status==='lost' && !mine) { r.line(x+4,y+4,x+size-4,y+size-4,2,'#ff8c7c'); }
         } else if (mine && (open || g.status==='lost')) {
             r.circle(cx,cy,size*.23,'#eee4da');

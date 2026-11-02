@@ -1,7 +1,7 @@
 {
-  "name": "iabadia_tetris",
-  "version": "0.1.0",
-  "description": "Tetris for the iDrive controller",
+  "name": "iabadia_minesweeper",
+  "version": "0.1.3",
+  "description": "Minesweeper for the iDrive controller",
   "private": false,
   "main": "javascript/runner.js",
   "oapAppSettings": {
@@ -11,7 +11,7 @@
     "priority": "PRIO_MEDIUM",
     "visibility": "FOREGROUND",
     "latencyClass": "FOREGROUND",
-    "loggingId": "TETR",
+    "loggingId": "MINE",
     "userLoginRequired": false,
     "backgroundPriority": 150,
     "someipManifest": "manifest.json"

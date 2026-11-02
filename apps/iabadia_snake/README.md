@@ -1,3 +1,5 @@
+<p><img src="assets/icon.png" alt="Snake icon" width="96" height="96"></p>
+
 # Snake
 
 Classic Snake for BMW iDrive 7. Eat red apples, grow your snake, and avoid walls and your own tail.

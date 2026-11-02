@@ -1,3 +1,5 @@
+<p><img src="assets/icon.png" alt="2048 icon" width="96" height="96"></p>
+
 # 2048
 
 Classic 4×4 2048 on the iDrive 7 main screen. Warm cream, orange and gold

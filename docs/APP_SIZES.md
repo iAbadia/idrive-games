@@ -4,9 +4,9 @@ Measured 2 November 2026. KiB = 1,024 bytes; MiB = 1,048,576 bytes.
 
 | App | Version | Compressed source package | Unpacked source |
 | --- | --- | ---: | ---: |
-| Tetris | 0.1.0 | ~135 KiB | ~272 KiB |
+| Tetris | 0.1.1 | ~153 KiB | ~290 KiB |
 | Snake | 0.1.1 | ~154 KiB | ~289 KiB |
-| Minesweeper | 0.1.2 | ~156 KiB | ~295 KiB |
+| Minesweeper | 0.1.3 | ~156 KiB | ~296 KiB |
 | 2048 | 0.1.3 | ~231 KiB | ~402 KiB |
 | Waze on cluster | 0.4.1 | 28.7 KiB | Not measured |
 | Store | 0.9.16 | 1,408.7 KiB (1.38 MiB) | Not measured |

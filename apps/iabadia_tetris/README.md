@@ -1,3 +1,5 @@
+<p><img src="assets/icon.png" alt="Tetris icon" width="96" height="96"></p>
+
 # Tetris
 
 A falling-block game for BMW iDrive 7. Fill horizontal rows to clear them and keep the stack from reaching the top.
