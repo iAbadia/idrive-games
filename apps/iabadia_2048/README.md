@@ -6,6 +6,8 @@ Tiles slide for 120 ms, then merged tiles briefly expand and settle while
 the new tile appears. The transition lasts 260 ms in total. Further moves
 take effect immediately; pausing or losing focus settles the board.
 
+## Controls
+
 - Tilt the controller left, right, up or down to move. A held tilt makes one move.
 - Press the center button to pause and open the menu.
 - Turn the wheel or tilt up/down to choose an item; press to select it.

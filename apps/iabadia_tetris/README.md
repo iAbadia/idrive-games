@@ -4,6 +4,8 @@ A falling-block game for BMW iDrive 7. Fill horizontal rows to clear them and ke
 
 ![Gameplay](preview/game.png)
 
+## Controls
+
 | Control | Action |
 | --- | --- |
 | Wheel | Move left/right |

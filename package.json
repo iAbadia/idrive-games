@@ -15,6 +15,7 @@
     "preview:minesweeper": "node apps/iabadia_minesweeper/tools/serve.js",
     "size": "node tools/check_sizes.js",
     "preview:snake": "node apps/iabadia_snake/tools/serve.js",
-    "preview:tetris": "node apps/iabadia_tetris/tools/serve.js"
+    "preview:tetris": "node apps/iabadia_tetris/tools/serve.js",
+    "media": "node tools/gallery.js"
   }
 }

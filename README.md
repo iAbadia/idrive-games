@@ -10,22 +10,74 @@ Games for BMW iDrive, built around the rotary controller and an OEM-inspired dar
 
 ## Games
 
-| Game | Features | Platform |
-| --- | --- | --- |
-| [2048](apps/iabadia_2048) | Animated tiles, rotary menus, saved progress and an arcade top five with three-letter initials | iDrive 7 |
-| [Tetris](apps/iabadia_tetris) | Falling blocks, ghost landing, next-piece preview and named high scores | iDrive 7 |
-| [Snake](apps/iabadia_snake) | Wheel steering, three speeds, saved progress and named high scores | iDrive 7 |
-| [Minesweeper](apps/iabadia_minesweeper) | Three difficulties, safe first reveals, flags, saved games and best times | iDrive 7 |
+<table>
+<tr>
+<td width="50%" valign="top">
+<h3><img src="apps/iabadia_2048/assets/icon.png" width="32" height="32" alt=""> <a href="apps/iabadia_2048">2048</a></h3>
+<img src="docs/media/2048.gif" alt="2048 gameplay" width="100%">
+<p>Slide, merge and chase 2048. Animated tiles and an arcade top five with three-letter names.</p>
+<a href="apps/iabadia_2048/preview/game.png">Full-size screenshot</a> · <a href="apps/iabadia_2048#controls">Controls</a>
+</td>
+<td width="50%" valign="top">
+<h3><img src="apps/iabadia_minesweeper/assets/icon.png" width="32" height="32" alt=""> <a href="apps/iabadia_minesweeper">Minesweeper</a></h3>
+<img src="docs/media/minesweeper.gif" alt="Minesweeper gameplay" width="100%">
+<p>Reveal safe cells and flag the mines. Three difficulties, saved progress and named best times.</p>
+<a href="apps/iabadia_minesweeper/preview/game.png">Full-size screenshot</a> · <a href="apps/iabadia_minesweeper#controls">Controls</a>
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+<h3><img src="apps/iabadia_snake/assets/icon.png" width="32" height="32" alt=""> <a href="apps/iabadia_snake">Snake</a></h3>
+<img src="docs/media/snake.gif" alt="Snake gameplay" width="100%">
+<p>Steer with the wheel and grow with every apple. Three speeds and named high scores.</p>
+<a href="apps/iabadia_snake/preview/game.png">Full-size screenshot</a> · <a href="apps/iabadia_snake#controls">Controls</a>
+</td>
+<td width="50%" valign="top">
+<h3><img src="apps/iabadia_tetris/assets/icon.png" width="32" height="32" alt=""> <a href="apps/iabadia_tetris">Tetris</a></h3>
+<img src="docs/media/tetris.gif" alt="Tetris gameplay" width="100%">
+<p>Stack, rotate and clear lines. Ghost landing, next-piece previews and named high scores.</p>
+<a href="apps/iabadia_tetris/preview/game.png">Full-size screenshot</a> · <a href="apps/iabadia_tetris#controls">Controls</a>
+</td>
+</tr>
+</table>
 
-![2048 gameplay](apps/iabadia_2048/preview/game.png)
+<sub>Short gameplay loops rendered from each game’s own drawing code. All games save progress and use wheel or up/down navigation in their pause menus.</sub>
+
+<details>
+<summary>View all screenshots</summary>
+
+### 2048
+
+![2048 screenshot](apps/iabadia_2048/preview/game.png)
+
+### Minesweeper
+
+![Minesweeper screenshot](apps/iabadia_minesweeper/preview/game.png)
+
+### Snake
+
+![Snake screenshot](apps/iabadia_snake/preview/game.png)
+
+### Tetris
+
+![Tetris screenshot](apps/iabadia_tetris/preview/game.png)
+
+</details>
 
 ## Install
 
-Add `iAbadia/idrive-games` in **Store → Settings → Add source**, choose the **main** branch, then install a game. Keep the existing mgu-store source enabled for the renderer dependency. The head unit links each game against its own SDK. Published versions can also be installed through **Releases** when available.
+Add `iAbadia/idrive-games` in **Store → Settings → Add source**, choose the **main** branch, then install a game. Keep the existing mgu-store source enabled for the shared renderer. Games run locally on the head unit.
 
 ## Controls
 
-**2048:** tilt to move; press to pause. **Minesweeper:** tilt to move the cursor; use the wheel to choose Reveal, Flag or Menu, then press. **Snake:** turn the wheel clockwise/right or counterclockwise/left to steer; press to pause. **Tetris:** wheel to slide, left/right tilt to rotate, down/up to soft/hard drop, press to pause. All games use wheel or up/down for menu navigation.
+| Game | Play |
+| --- | --- |
+| 2048 | Tilt to slide the tiles |
+| Minesweeper | Tilt to move; wheel to choose Reveal, Flag or Menu; press to act |
+| Snake | Wheel clockwise to turn right; counterclockwise to turn left |
+| Tetris | Wheel to slide; left/right tilt to rotate; down/up for soft/hard drop |
+
+Press to pause in 2048, Snake and Tetris. Every pause menu supports the wheel or up/down, with center to confirm.
 
 ## Development
 
@@ -37,7 +89,7 @@ npm run build
 npm run preview
 ```
 
-The desktop preview opens at `http://127.0.0.1:2048`. See the [2048 guide](apps/iabadia_2048) for keyboard controls and the [release guide](release) for packaging.
+The default preview opens at `http://127.0.0.1:2048`. See the [development notes](docs/DEVELOPMENT.md) for all four previews, [media guide](docs/media) to regenerate the gallery, and [release guide](release) for packaging.
 
 ## Credits & license
 
