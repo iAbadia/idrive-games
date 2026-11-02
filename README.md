@@ -10,17 +10,15 @@ Games for BMW iDrive, built around the rotary controller and an OEM-inspired dar
 
 ## Games
 
-| Game | Features | Status |
+| Game | Features | Platform |
 | --- | --- | --- |
-| [2048](apps/iabadia_2048) | Animated tiles, rotary menus, saved progress and an arcade top five with three-letter initials | In development · iDrive 7 |
+| [2048](apps/iabadia_2048) | Animated tiles, rotary menus, saved progress and an arcade top five with three-letter initials | iDrive 7 |
 
 ![2048 gameplay](apps/iabadia_2048/preview/game.png)
 
 ## Install
 
-**The first car-ready release is pending head-unit validation.** Desktop tests pass; emulator and physical-car testing remain outstanding.
-
-Once released, add `iAbadia/idrive-games` in **Store → Settings → Add source**, choose **Releases**, then install a game. Keep the existing mgu-store source enabled for the renderer dependency. The head unit links each game against its own SDK.
+Add `iAbadia/idrive-games` in **Store → Settings → Add source**, choose **Releases**, then install a game. Keep the existing mgu-store source enabled for the renderer dependency. The head unit links each game against its own SDK.
 
 ## Controls
 

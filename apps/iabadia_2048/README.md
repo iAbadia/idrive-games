@@ -54,16 +54,6 @@ Desktop preview saves are separate from the car's data.
 ![Game](preview/game.png)
 ![Pause menu](preview/pause.png)
 
-## Validation scope
-
-Engine, input, persistence, rendering, mocked OAP lifecycle and renderer wire
-tests run on the development machine. Source packaging does not include
-BMW SDK modules or a built `javascript/app.js`.
-
-Head-unit emulator validation and physical controller/display validation
-are still required before release. The development workspace does not
-currently include the head-unit emulator or an SDK donor.
-
 The drawing kit and renderer client are adapted from mgu-store and the
 community idrive7-apps kit (MIT; `LICENSE-kit.txt`). Inter glyph atlases
 are SIL OFL 1.1 (`LICENSE-Inter.txt`). FrontCCU direction ordinals are
