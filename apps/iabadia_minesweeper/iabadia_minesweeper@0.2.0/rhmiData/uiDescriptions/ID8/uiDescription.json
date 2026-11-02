@@ -1,0 +1,143 @@
+{
+  "schemaVersion": "1.3.0",
+  "containers": {
+    "1": {
+      "type": "state",
+      "name": "ST_OnlineApps_Minesweeper",
+      "components": {
+        "10": {
+          "type": "title",
+          "name": "gameTitleID8",
+          "properties": {
+            "Visible": {
+              "value": 1,
+              "type": "UInt"
+            }
+          },
+          "rows": [
+            {
+              "Text": {
+                "value": "SID_Minesweeper_TITLE",
+                "type": "StringId"
+              }
+            }
+          ]
+        },
+        "20": {
+          "type": "label",
+          "name": "gameStatus",
+          "properties": {
+            "Visible": {
+              "value": 1,
+              "type": "UInt"
+            },
+            "Focusable": {
+              "value": 0,
+              "type": "UInt"
+            }
+          },
+          "rows": [
+            {
+              "Text": {
+                "value": "Connecting to renderer\u2026",
+                "type": "Text"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "2": {
+      "type": "state",
+      "name": "ST_OnlineApps_Minesweeper_Menu",
+      "components": {
+        "210": {
+          "type": "title",
+          "name": "gameTitle_Menu",
+          "properties": {
+            "Visible": {
+              "value": 1,
+              "type": "UInt"
+            }
+          },
+          "rows": [
+            {
+              "Text": {
+                "value": "SID_Minesweeper_TITLE",
+                "type": "StringId"
+              }
+            }
+          ]
+        },
+        "220": {
+          "type": "label",
+          "name": "gameStatus_Menu",
+          "properties": {
+            "Visible": {
+              "value": 1,
+              "type": "UInt"
+            },
+            "Focusable": {
+              "value": 0,
+              "type": "UInt"
+            }
+          },
+          "rows": [
+            {
+              "Text": {
+                "value": "Connecting to renderer\u2026",
+                "type": "Text"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "3": {
+      "type": "state",
+      "name": "ST_OnlineApps_Minesweeper_Detail",
+      "components": {
+        "310": {
+          "type": "title",
+          "name": "gameTitle_Detail",
+          "properties": {
+            "Visible": {
+              "value": 1,
+              "type": "UInt"
+            }
+          },
+          "rows": [
+            {
+              "Text": {
+                "value": "SID_Minesweeper_TITLE",
+                "type": "StringId"
+              }
+            }
+          ]
+        },
+        "320": {
+          "type": "label",
+          "name": "gameStatus_Detail",
+          "properties": {
+            "Visible": {
+              "value": 1,
+              "type": "UInt"
+            },
+            "Focusable": {
+              "value": 0,
+              "type": "UInt"
+            }
+          },
+          "rows": [
+            {
+              "Text": {
+                "value": "Connecting to renderer\u2026",
+                "type": "Text"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

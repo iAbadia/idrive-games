@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "1.3.0",
+  "application": {
+    "uuid": "79be23d9-5b70-46cc-a6f6-7b2713998f2c",
+    "type": "OnlineApp",
+    "name": "iabadia_minesweeper",
+    "vendor": "iAbadia",
+    "version": "0.2.0",
+    "defaultLanguage": "en_GB",
+    "uiDescriptions": [
+      {
+        "applicationFilePath": "./uiDescriptions/ID7/application.xml",
+        "uiDescriptionFilePath": "./uiDescriptions/ID7/uiDescription.json",
+        "hmi": [
+          "ID7"
+        ]
+      },
+      {
+        "applicationFilePath": "./uiDescriptions/ID8/application.xml",
+        "uiDescriptionFilePath": "./uiDescriptions/ID8/uiDescription.json",
+        "hmi": [
+          "ID8"
+        ]
+      }
+    ],
+    "stringBundleUuid": "e02b34cc-3ce8-486d-b6bd-ab33eeaadc82",
+    "resourceBundleUuid": "e856fbcb-af7f-4d32-82b7-c29aa1669170",
+    "variantGroups": [
+      {
+        "stringsPath": "./variantGroups/Common/texts",
+        "resourcesPath": "./variantGroups/Common/images",
+        "hmi": [
+          "ID7",
+          "ID8"
+        ],
+        "brands": [
+          "BMW"
+        ]
+      }
+    ],
+    "entryPoints": [
+      {
+        "name": "iabadia_minesweeper",
+        "uuid": "188f0b83-8f46-45d4-a9cb-15b508f70d1d",
+        "textId": "SID_Minesweeper_TITLE",
+        "insertionStateId": 20974,
+        "insertionFocusId": 2,
+        "insertionMode": "INSERT_BELOW",
+        "insertionOrder": 0,
+        "insertionPriority": 0,
+        "previewType": "NONE",
+        "bookmarkable": true,
+        "private": null,
+        "appearance": "DEFAULT",
+        "isGroupHeader": false,
+        "insertionGroup": 0,
+        "icon": "iabadia_minesweeper_icon.png"
+      }
+    ]
+  }
+}

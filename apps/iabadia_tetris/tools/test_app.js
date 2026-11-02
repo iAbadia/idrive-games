@@ -14,7 +14,7 @@ async function until(fn) { for (let i = 0; i < 100; i++) { if (fn()) return; awa
 async function lifecycle() {
  let app,gpu,saved;const states=[new EventEmitter(),new EventEmitter(),new EventEmitter()];states.forEach(s=>s.updateResources=()=>Promise.resolve());
  const rhmi=new EventEmitter(),status={setValue(){return Promise.resolve();}},opened=[],closed=[];
- rhmi.getByName=n=>n==='gameStatus'?status:states[n.endsWith('_Detail')?2:n.endsWith('_Menu')?1:0];
+ rhmi.getByName=n=>n==='gameTitleID8'?null:n==='gameStatus'?status:states[n.endsWith('_Detail')?2:n.endsWith('_Menu')?1:0];
  rhmi.mapEntryState=()=>Promise.resolve();rhmi.openEntryState=()=>Promise.resolve();
  rhmi.openState=n=>{opened.push(n);return Promise.resolve();};rhmi.closeState=n=>{closed.push(n);return Promise.resolve();};
  const d={uuid:'entry',textId:'SID_Tetris_TITLE',icon:'icon.png'};
@@ -45,7 +45,7 @@ async function lifecycle() {
 function message(type, payload) {
     const b = Buffer.alloc(8 + payload.length); b.writeUInt32LE(type); b.writeUInt32LE(payload.length, 4); payload.copy(b, 8); return b;
 }
-async function wire() {
+async function wire(hmi) {
     const { RenderClient } = require('../src/mgu_render_client.js');
     const socket = process.platform === 'win32' ? '\\\\.\\pipe\\mgu-tetris-test-' + process.pid : path.join(require('os').tmpdir(), 'mgu-tetris-' + process.pid + '.sock');
     const peers = new Set(); let peer, input = Buffer.alloc(0); const received = [];
@@ -57,7 +57,7 @@ async function wire() {
                 const type = input.readUInt32LE(0), len = input.readUInt32LE(4), p = input.slice(8, 8 + len);
                 received.push({ type, p: Buffer.from(p) }); input = input.slice(8 + len);
                 if (type === 1) {
-                    const x = Buffer.alloc(52); [1, 2, 2, 100, 100, 1280, 480, 0, 0, 1920, 720, 1024, 60000].forEach((v, i) => x.writeUInt32LE(v, i * 4));
+                    const x = Buffer.alloc(52); (hmi === 'ID8' ? [1,1,2,0,0,0,0,0,76,2880,764,1024,60000] : [1,2,2,100,100,1280,480,0,0,1920,720,1024,60000]).forEach((v, i) => x.writeUInt32LE(v, i * 4));
                     const r = Buffer.alloc(12); r.writeUInt32LE(1920, 4); r.writeUInt32LE(720, 8);
                     // Real stream framing: a split header, then coalesced messages.
                     const all = Buffer.concat([message(0x4d520101, x), message(101, r)]);
@@ -72,6 +72,7 @@ async function wire() {
     const s = new Session(null); s.visibility(true); gpu.on('ccu', (e) => s.ccu(e));
     try {
         gpu.connect(); await until(() => gpu.ready); assert(gpu.info.controller);
+        if (hmi === 'ID8') { assert.deepStrictEqual(gpu.info.modes, ['layer']); assert.deepStrictEqual(gpu.info.appArea, {x:0,y:76,w:2880,h:764}); gpu.mode('layer'); }
         gpu.place({ x: 100, y: 100, w: 1280, h: 480, scale: 1, ox: 0, oy: 0 }); gpu.show(true); gpu.grab(true); gpu.frame(draw(s));
         await until(() => received.some((m) => m.type === 7));
         assert(received.some((m) => m.type === 4)); // Font atlases uploaded before drawing.
@@ -84,4 +85,4 @@ async function wire() {
         gpu.close(); peers.forEach((p) => p.destroy()); await new Promise((r) => server.close(r));
     }
 }
-(async () => { await lifecycle(); await wire(); })().catch((e) => { console.error(e); process.exitCode = 1; });
+(async () => { await lifecycle(); await wire('ID7'); await wire('ID8'); })().catch((e) => { console.error(e); process.exitCode = 1; });

@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://github.com/iAbadia/idrive-games/actions/workflows/test.yml"><img src="https://github.com/iAbadia/idrive-games/actions/workflows/test.yml/badge.svg" alt="Build and tests"></a>
-  <img src="https://img.shields.io/badge/iDrive-7-173953" alt="iDrive 7">
+  <img src="https://img.shields.io/badge/iDrive-7%20%2F%208-173953" alt="iDrive 7 / 8">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0--or--later-555" alt="GPL-3.0-or-later"></a>
 </p>
 
@@ -82,6 +82,8 @@ Press to pause in 2048, Snake and Tetris. Every pause menu supports the wheel or
 ## Development
 
 Node.js 22+ and Git. No npm dependencies are required.
+
+This feature branch adds ID8 rendering and controller routing under the same-input assumption. See the [ID8 platform notes](docs/IDRIVE8.md) for local checks and the runtime validation required before merge.
 
 ```sh
 npm test

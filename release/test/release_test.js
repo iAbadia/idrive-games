@@ -131,12 +131,12 @@ test('the build tree holds a submodule at its recorded commit; one its checkout 
     assert.throws(() => exportHead(main), /git archive 1{40} in third_party[\\/]lib failed/);
 });
 
-test('2048 catalog declares its renderer dependency and ID7 compatibility', () => {
+test('2048 catalog declares its renderer dependency and ID7/ID8 compatibility', () => {
     const all = components();
     assert.strictEqual(all.length, 4);
     const app = all.find(c => c.id === 'iabadia_2048');
     assert.strictEqual(app.id, 'iabadia_2048');
-    assert.deepStrictEqual(app.mguHmi, ['ID7']);
+    assert.deepStrictEqual(app.mguHmi, ['ID7', 'ID8']);
     assert.deepStrictEqual(app.requires, { 'mgu-render': '0.6.9' });
     assert.strictEqual(app.uninstallable, true);
 });

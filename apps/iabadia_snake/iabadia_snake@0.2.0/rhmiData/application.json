@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "1.3.0",
+  "application": {
+    "uuid": "4c3ac7b5-a79e-49c2-a304-d78fcc35753b",
+    "type": "OnlineApp",
+    "name": "iabadia_snake",
+    "vendor": "iAbadia",
+    "version": "0.2.0",
+    "defaultLanguage": "en_GB",
+    "uiDescriptions": [
+      {
+        "applicationFilePath": "./uiDescriptions/ID7/application.xml",
+        "uiDescriptionFilePath": "./uiDescriptions/ID7/uiDescription.json",
+        "hmi": [
+          "ID7"
+        ]
+      },
+      {
+        "applicationFilePath": "./uiDescriptions/ID8/application.xml",
+        "uiDescriptionFilePath": "./uiDescriptions/ID8/uiDescription.json",
+        "hmi": [
+          "ID8"
+        ]
+      }
+    ],
+    "stringBundleUuid": "7e153bb9-56de-4202-98c3-5b332031923f",
+    "resourceBundleUuid": "b929691e-6b85-475c-8444-368e92ff9863",
+    "variantGroups": [
+      {
+        "stringsPath": "./variantGroups/Common/texts",
+        "resourcesPath": "./variantGroups/Common/images",
+        "hmi": [
+          "ID7",
+          "ID8"
+        ],
+        "brands": [
+          "BMW"
+        ]
+      }
+    ],
+    "entryPoints": [
+      {
+        "name": "iabadia_snake",
+        "uuid": "c3605bfa-62ce-4f2e-8612-839022ad9beb",
+        "textId": "SID_Snake_TITLE",
+        "insertionStateId": 20974,
+        "insertionFocusId": 2,
+        "insertionMode": "INSERT_BELOW",
+        "insertionOrder": 0,
+        "insertionPriority": 0,
+        "previewType": "NONE",
+        "bookmarkable": true,
+        "private": null,
+        "appearance": "DEFAULT",
+        "isGroupHeader": false,
+        "insertionGroup": 0,
+        "icon": "iabadia_snake_icon.png"
+      }
+    ]
+  }
+}

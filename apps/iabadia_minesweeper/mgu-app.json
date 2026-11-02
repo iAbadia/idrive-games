@@ -1,8 +1,8 @@
 {
   "schema": 1,
   "id": "iabadia_minesweeper",
-  "version": "0.1.3",
-  "tree": "iabadia_minesweeper@0.1.3",
+  "version": "0.2.0",
+  "tree": "iabadia_minesweeper@0.2.0",
   "modules": [
     "src/iabadia_minesweeper.js",
     "src/draw.js",
@@ -14,10 +14,12 @@
     "src/kit_record.js",
     "src/mgu_render_client.js",
     "src/session.js",
-    "src/storage.js"
+    "src/storage.js",
+    "src/platform.js"
   ],
   "sdk": [
     "oap-sdk/src/core/OnlineApp.js",
-    "oap-sdk/src/logging/logging"
+    "oap-sdk/src/logging/logging",
+    "oap-sdk/src/someip/someipBuilders"
   ]
 }

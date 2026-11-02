@@ -2,7 +2,7 @@
 
 # Tetris
 
-A falling-block game for BMW iDrive 7. Fill horizontal rows to clear them and keep the stack from reaching the top.
+A falling-block game for BMW iDrive 7 / 8. Fill horizontal rows to clear them and keep the stack from reaching the top.
 
 ![Gameplay](preview/game.png)
 
@@ -27,3 +27,5 @@ Choose Relaxed, Classic or Fast starting speed. Each keeps one best score and th
 `npm run preview:tetris` opens the desktop preview at http://127.0.0.1:2052. Use `[` / `]` or the wheel to slide, arrow keys to rotate/drop, Enter to pause, Escape to go back. Run `npm test`, `npm run build`, `npm run size` from the repository root.
 
 Uses the shared renderer and the head unit's own SDK. No runtime npm dependencies. Independent community implementation, not affiliated with The Tetris Company.
+
+ID8 uses layer rendering and the same controller mapping. See [platform notes](../../docs/IDRIVE8.md) for the input assumption and local validation.

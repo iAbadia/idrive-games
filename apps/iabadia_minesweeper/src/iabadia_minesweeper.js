@@ -7,6 +7,7 @@ const { Session } = require('./session.js');
 const storage = require('./storage.js');
 const { RenderClient } = require('./mgu_render_client.js');
 const kit = require('./kit_record.js');
+const { host, DirectController } = require('./platform.js');
 const { draw, WIDTH, HEIGHT } = require('./draw.js');
 const STATE = 'ST_OnlineApps_Minesweeper';
 const STATES = [STATE, STATE + '_Menu', STATE + '_Detail'];
@@ -21,21 +22,11 @@ class AppMinesweeper extends OnlineApp {
         this.session = new Session(storage.load(this.saveFile), {
             save: (s) => storage.save(this.saveFile, s), change: () => this.render(), exit: () => this.exitApp()
         });
-        this.gpu = new RenderClient('iabadia_minesweeper', logger, { kit, mode: 'embed' });
+        this.gpu = new RenderClient('iabadia_minesweeper', logger, { kit, mode: 'layer' });
         this.gpu.fps(30);
-        this.gpu.on('ready', (screen, info) => {
-            this.ready = !!(info && info.controller && info.modes.indexOf('embed') >= 0);
-            if (this.ready) {
-                const b = info.embedBox, scale = Math.min(b.w / WIDTH, b.h / HEIGHT);
-                this.gpu.mode('embed');
-                this.gpu.place({ x: b.x, y: b.y, w: b.w, h: b.h, scale,
-                    ox: (b.w - WIDTH * scale) / 2, oy: (b.h - HEIGHT * scale) / 2 });
-            }
-            this.status(this.ready ? '' : 'Minesweeper needs the renderer with controller support. Update Renderer in the Store.');
-            this.updateVisibility();
-        });
-        this.gpu.on('close', () => { this.ready = false; this.updateVisibility(); this.status('Renderer disconnected. ReconnectingÃ¢â‚¬Â¦'); });
-        this.gpu.on('ccu', (e) => this.session.ccu(e));
+        this.gpu.on('ready', (screen, info) => this.configureRenderer(info));
+        this.gpu.on('close', () => { this.rendererInfo = null; this.ready = false; this.updateVisibility(); this.status('Renderer disconnected. Reconnecting...'); });
+        this.gpu.on('ccu', (e) => { if (this.inputVia === 'renderer') this.session.ccu(e); });
         this.gpu.on('tick', () => { if (this.dirty || this.session.animating()) this.render(); });
         this.gpu.on('closed', () => { this.focused = false; this.updateVisibility(); });
         this.on('initialized', () => this.initialize().catch((e) => logger.error('Minesweeper init: ' + e.message)));
@@ -44,8 +35,40 @@ class AppMinesweeper extends OnlineApp {
         this.on('entryPointExecute', (uuid) => this.open(uuid));
         this.on('changeVisibility', (e) => { if (e && e.visible === false) { this.visible = false; this.updateVisibility(); } });
     }
+    configureRenderer(info) {
+        this.rendererInfo = info;
+        const selected = host(info, this.hmi || 'ID7', WIDTH, HEIGHT);
+        this.ready = false;
+        if (!selected) { this.status('No compatible renderer display mode. Update Renderer in the Store.'); this.updateVisibility(); return; }
+        this.renderMode = selected.mode;
+        this.gpu.mode(selected.mode); this.gpu.place(selected.placement);
+        const via = info.controller ? 'renderer' : this.hmi === 'ID8' ? 'direct' : null;
+        if (this.inputVia !== via) this.session.last = null;
+        this.inputVia = via;
+        if (via === 'renderer') { this.ready = true; this.status(''); }
+        else if (via === 'direct') {
+            if (!this.directInput) this.directInput = new DirectController(e => {
+                if (this.inputVia === 'direct' && this.ready) this.session.ccu(e);
+            });
+            if (this.directInput.ready) { this.ready = true; this.status(''); }
+            else {
+                this.status('Connecting to iDrive controller...');
+                const pendingInput = this.directInput;
+                pendingInput.start().then(() => {
+                    if (this.ending || this.rendererInfo !== info || this.inputVia !== 'direct' || !pendingInput.ready) return;
+                    this.ready = true; this.status(''); this.updateVisibility();
+                }).catch(e => {
+                    if (!this.ending && this.rendererInfo === info) { this.ready = false; this.status('Controller unavailable. Reopen the app to retry.'); this.updateVisibility(); }
+                    if (this.directInput === pendingInput) { pendingInput.close(); this.directInput = null; }
+                    logger.warn('Controller: ' + e.message);
+                });
+            }
+        } else this.status('This game needs controller support. Update Renderer in the Store.');
+        this.updateVisibility();
+    }
     initialize() {
         if (!this.rhmiApplication) return this.initialized();
+        this.hmi = this.rhmiApplication.getByName('gameTitleID8') ? 'ID8' : 'ID7';
         this.state = this.rhmiApplication.getByName(STATE);
         if (!this.state) throw new Error('Minesweeper state missing');
         this.states = STATES.map((name) => this.rhmiApplication.getByName(name));
@@ -109,15 +132,16 @@ class AppMinesweeper extends OnlineApp {
     }
     open(uuid) {
         if (!this.rhmiApplication || this.ending) return Promise.resolve();
+        if (this.rendererInfo && !this.ready) this.configureRenderer(this.rendererInfo);
         this.visible = true; this.focused = true; this.updateVisibility();
         return Promise.resolve(this.rhmiApplication.openEntryState(uuid)).catch((e) => logger.warn(e.message));
     }
     updateVisibility() {
         if (this.ending) return;
-        const shown = this.visible && this.ready;
+        const shown = this.visible && this.ready && (this.renderMode !== 'layer' || this.focused);
         const active = shown && this.focused;
         this.gpu.show(shown);
-        this.gpu.grab(active);
+        this.gpu.grab(active && this.inputVia === 'renderer');
         if (active !== this.session.visible) this.session.visibility(active);
         if (this._initialized && this._appStatusService && this.reported !== this.visible) {
             this.reported = this.visible;
@@ -165,7 +189,7 @@ class AppMinesweeper extends OnlineApp {
         if (this.ending) return this.ending;
         this.session.save(); this.gpu.grab(false); this.gpu.show(false); this.gpu.close(); clearInterval(this.keepalive);
         clearTimeout(this.hideTimer); clearTimeout(this.focusTimer);
-        this.ending = Promise.resolve().then(() => this.destroyBundles())
+        this.ending = Promise.resolve(this.directInput && this.directInput.close()).then(() => this.destroyBundles())
             .catch((e) => logger.warn(e.message)).then(() => process.exit(0));
         return this.ending;
     }

@@ -2,7 +2,7 @@
 
 # 2048
 
-Classic 4×4 2048 on the iDrive 7 main screen. Warm cream, orange and gold
+Classic 4×4 2048 on the iDrive 7 / 8 main screen. Warm cream, orange and gold
 tiles sit on a charcoal board, with a black background and blue menu focus.
 Tiles slide for 120 ms, then merged tiles briefly expand and settle while
 the new tile appears. The transition lasts 260 ms in total. Further moves
@@ -37,8 +37,8 @@ A failed score write keeps the initials editor open for retry.
 
 The Store installs the source package and links it to the head unit's own
 OAP SDK. Requires `mgu-render` 0.6.9 with its HMI controller gate active.
-Without controller support, the app displays an update message and does not
-grab input. BACK and MENU remain HMI controls. No network access is needed.
+ID7 requires renderer controller capture. ID8 can also subscribe directly to
+FrontCCU through the SDK. BACK and MENU remain HMI controls. No network access is needed.
 
 ## Development
 
@@ -62,3 +62,5 @@ The drawing kit and renderer client are adapted from mgu-store and the
 community idrive7-apps kit (MIT; `LICENSE-kit.txt`). Inter glyph atlases
 are SIL OFL 1.1 (`LICENSE-Inter.txt`). FrontCCU direction ordinals are
 documented in the upstream [Doom controls](https://github.com/cauliflowermossgrape/idrive7-apps/blob/main/apps/doom/controls.js).
+
+ID8 uses layer rendering and the same controller mapping. See [platform notes](../../docs/IDRIVE8.md) for the input assumption and local validation.

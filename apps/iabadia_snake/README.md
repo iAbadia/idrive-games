@@ -2,7 +2,7 @@
 
 # Snake
 
-Classic Snake for BMW iDrive 7. Eat red apples, grow your snake, and avoid walls and your own tail.
+Classic Snake for BMW iDrive 7 / 8. Eat red apples, grow your snake, and avoid walls and your own tail.
 
 ![Snake gameplay](preview/game.png)
 
@@ -24,3 +24,5 @@ Turn the wheel to start. Two turns can be queued; opposite-direction tilt is ign
 From the repository root: `npm run preview:snake` (http://127.0.0.1:2051). Keyboard: `[` turns left, `]` turns right, Enter pauses, Escape goes back. `npm test`, `npm run build`, and `npm run size` cover all games.
 
 Uses the shared mgu-render dependency and the head unit's SDK. No npm runtime dependencies or BMW SDK binaries are shipped.
+
+ID8 uses layer rendering and the same controller mapping. See [platform notes](../../docs/IDRIVE8.md) for the input assumption and local validation.

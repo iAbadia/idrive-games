@@ -32,6 +32,6 @@ Run `npm run build` then `npm run size`. See [the measured comparison and budget
 
 The [gallery media guide](media/README.md) covers screenshots and compact gameplay GIFs.
 
-## Platform research
+## ID8 feature branch
 
-[ID8 compatibility investigation](IDRIVE8.md) records the current blockers, a reproducible capability probe and the proposed validation sequence. This branch does not enable ID8 installations.
+[ID8 platform notes](IDRIVE8.md) describe the implemented host selection, direct controller fallback and pending runtime checks. Work stays on `feature/idrive8-support` until compatibility is confirmed. `node tools/test_platform.js` runs the platform-specific suite (also included in `npm test`).

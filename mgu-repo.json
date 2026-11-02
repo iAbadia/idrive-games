@@ -13,7 +13,8 @@
       },
       "uninstallable": true,
       "mguHmi": [
-        "ID7"
+        "ID7",
+        "ID8"
       ]
     },
     {
@@ -28,7 +29,8 @@
       },
       "uninstallable": true,
       "mguHmi": [
-        "ID7"
+        "ID7",
+        "ID8"
       ]
     },
     {
@@ -43,7 +45,8 @@
       },
       "uninstallable": true,
       "mguHmi": [
-        "ID7"
+        "ID7",
+        "ID8"
       ]
     },
     {
@@ -58,7 +61,8 @@
       },
       "uninstallable": true,
       "mguHmi": [
-        "ID7"
+        "ID7",
+        "ID8"
       ]
     }
   ]

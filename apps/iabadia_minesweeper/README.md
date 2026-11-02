@@ -2,7 +2,7 @@
 
 # Minesweeper
 
-Classic Minesweeper for iDrive 7, with a dark interface and controller input.
+Classic Minesweeper for iDrive 7 / 8, with a dark interface and controller input.
 
 ![Minesweeper](preview/game.png)
 
@@ -51,3 +51,5 @@ MIT drawing-kit and Inter font licenses are retained in the staged app tree;
 see the repository's [third-party notices](../../THIRD_PARTY.md).
 
 The source package is approximately 134 KiB. It contains only the font atlas sizes the game uses; see [size measurements](../../docs/APP_SIZES.md).
+
+ID8 uses layer rendering and the same controller mapping. See [platform notes](../../docs/IDRIVE8.md) for the input assumption and local validation.

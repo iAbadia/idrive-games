@@ -4,10 +4,10 @@ Measured 2 November 2026. KiB = 1,024 bytes; MiB = 1,048,576 bytes.
 
 | App | Version | Compressed source package | Unpacked source |
 | --- | --- | ---: | ---: |
-| Tetris | 0.1.1 | ~153 KiB | ~290 KiB |
-| Snake | 0.1.1 | ~154 KiB | ~289 KiB |
-| Minesweeper | 0.1.3 | ~156 KiB | ~296 KiB |
-| 2048 | 0.1.3 | ~231 KiB | ~402 KiB |
+| Tetris | 0.2.0 | ~155 KiB | ~299 KiB |
+| Snake | 0.2.0 | ~156 KiB | ~299 KiB |
+| Minesweeper | 0.2.0 | ~158 KiB | ~305 KiB |
+| 2048 | 0.2.0 | ~232 KiB | ~411 KiB |
 | Waze on cluster | 0.4.1 | 28.7 KiB | Not measured |
 | Store | 0.9.16 | 1,408.7 KiB (1.38 MiB) | Not measured |
 
@@ -50,3 +50,5 @@ Minesweeper 0.1.2 uses a richer reference-based launcher icon (about 23 KiB). On
 Snake reuses the small Minesweeper font subset and ships a small padded launcher icon, with no third-party game engine or runtime npm packages.
 
 Tetris uses the same small font subset and shared renderer. Its game rules, next-piece preview and ghost outline add no external engine or npm runtime dependencies.
+
+The 0.2.0 feature-branch packages add ID8 host resources and a small shared platform/input helper. No additional engine, fonts or renderer binary is bundled.
