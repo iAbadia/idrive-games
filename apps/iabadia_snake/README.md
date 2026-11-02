@@ -1,6 +1,6 @@
 # Snake
 
-Classic Snake for BMW iDrive 7. Eat amber food, grow your snake, and avoid walls and your own tail.
+Classic Snake for BMW iDrive 7. Eat red apples, grow your snake, and avoid walls and your own tail.
 
 ![Snake gameplay](preview/game.png)
 

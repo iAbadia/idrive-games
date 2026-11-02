@@ -4,7 +4,7 @@ Measured 2 November 2026. KiB = 1,024 bytes; MiB = 1,048,576 bytes.
 
 | App | Version | Compressed source package | Unpacked source |
 | --- | --- | ---: | ---: |
-| Snake | 0.1.0 | ~134 KiB | ~269 KiB |
+| Snake | 0.1.1 | ~154 KiB | ~289 KiB |
 | Minesweeper | 0.1.2 | ~156 KiB | ~295 KiB |
 | 2048 | 0.1.3 | ~231 KiB | ~402 KiB |
 | Waze on cluster | 0.4.1 | 28.7 KiB | Not measured |
@@ -46,4 +46,4 @@ Minesweeper 0.1.2 uses a richer reference-based launcher icon (about 23 KiB). On
 
 2048 0.1.3 adds a reference-inspired gold launcher tile (about 20 KiB PNG), retaining the optimized font subset.
 
-Snake reuses the small Minesweeper font subset and ships a 3 KiB vector-rendered launcher icon, with no third-party game engine or runtime npm packages.
+Snake reuses the small Minesweeper font subset and ships a small padded launcher icon, with no third-party game engine or runtime npm packages.

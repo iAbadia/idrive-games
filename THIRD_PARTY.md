@@ -6,4 +6,4 @@
 
 Repository branding and game screenshots use this project's own assets and synthetic game states. BMW SDK modules and firmware files are excluded.
 
-Snake uses the same drawing kit, renderer client and Inter font subset as Minesweeper; the corresponding MIT and OFL notices are retained in its staged tree. Its launcher icon is original vector artwork.
+Snake uses the same drawing kit, renderer client and Inter font subset as Minesweeper; the corresponding MIT and OFL notices are retained in its staged tree. Its launcher icon is adapted from user-supplied artwork.
