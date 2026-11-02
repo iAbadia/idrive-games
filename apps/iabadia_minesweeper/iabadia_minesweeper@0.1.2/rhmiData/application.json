@@ -5,7 +5,7 @@
     "type": "OnlineApp",
     "name": "iabadia_minesweeper",
     "vendor": "iAbadia",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "defaultLanguage": "en_GB",
     "uiDescriptions": [
       {
