@@ -2,6 +2,8 @@
 
 ## 0.2.0
 
+- Require mgu-deploy 0.7.5+ for firmware-aware dual-platform service declarations.
+
 - Dual ID7/ID8 resources and renderer host negotiation.
 - ID8 direct FrontCCU fallback with the existing controller mapping.
 - Local platform tests; ID8 vehicle validation remains pending.

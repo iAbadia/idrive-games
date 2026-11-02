@@ -137,7 +137,7 @@ test('2048 catalog declares its renderer dependency and ID7/ID8 compatibility', 
     const app = all.find(c => c.id === 'iabadia_2048');
     assert.strictEqual(app.id, 'iabadia_2048');
     assert.deepStrictEqual(app.mguHmi, ['ID7', 'ID8']);
-    assert.deepStrictEqual(app.requires, { 'mgu-render': '0.6.9' });
+    assert.deepStrictEqual(app.requires, { 'mgu-render': '0.6.9', 'mgu-deploy': '0.7.5' });
     assert.strictEqual(app.uninstallable, true);
 });
 

@@ -9,7 +9,8 @@
       "title": "2048",
       "description": "2048 with animated tiles, controller menus and arcade high scores",
       "requires": {
-        "mgu-render": "0.6.9"
+        "mgu-render": "0.6.9",
+        "mgu-deploy": "0.7.5"
       },
       "uninstallable": true,
       "mguHmi": [
@@ -25,7 +26,8 @@
       "title": "Minesweeper",
       "description": "Classic Minesweeper with controller input, safe first reveals and saved best times",
       "requires": {
-        "mgu-render": "0.6.9"
+        "mgu-render": "0.6.9",
+        "mgu-deploy": "0.7.5"
       },
       "uninstallable": true,
       "mguHmi": [
@@ -41,7 +43,8 @@
       "title": "Snake",
       "description": "Classic Snake with three speeds, saved progress and named high scores",
       "requires": {
-        "mgu-render": "0.6.9"
+        "mgu-render": "0.6.9",
+        "mgu-deploy": "0.7.5"
       },
       "uninstallable": true,
       "mguHmi": [
@@ -57,7 +60,8 @@
       "title": "Tetris",
       "description": "Falling blocks with rotary movement, ghost pieces, seven-bag randomization and saved scores",
       "requires": {
-        "mgu-render": "0.6.9"
+        "mgu-render": "0.6.9",
+        "mgu-deploy": "0.7.5"
       },
       "uninstallable": true,
       "mguHmi": [

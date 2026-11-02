@@ -82,7 +82,7 @@ async function failedSubscription(){
 function metadata(){
  for(const id of ['iabadia_2048','iabadia_minesweeper','iabadia_snake','iabadia_tetris']){
   const base=path.join(root,'apps',id),m=require(path.join(base,'mgu-app.json')),tree=path.join(base,m.tree);
-  assert.deepStrictEqual(require(path.join(base,'release.json')).mguHmi,['ID7','ID8']);assert.deepStrictEqual(require(path.join(tree,'package.json')).mguHmi,['ID7','ID8']);
+  assert.deepStrictEqual(require(path.join(base,'release.json')).mguHmi,['ID7','ID8']);assert.equal(require(path.join(base,'release.json')).requires['mgu-deploy'],'0.7.5');assert.deepStrictEqual(require(path.join(tree,'package.json')).mguHmi,['ID7','ID8']);
   const rhmi=require(path.join(tree,'rhmiData/application.json')).application;
   assert(rhmi.uiDescriptions.some(d=>d.hmi.includes('ID8')));assert(rhmi.variantGroups[0].hmi.includes('ID8'));
   const a=require(path.join(tree,'rhmiData/uiDescriptions/ID7/uiDescription.json')),b=require(path.join(tree,'rhmiData/uiDescriptions/ID8/uiDescription.json'));

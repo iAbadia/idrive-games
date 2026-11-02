@@ -6,7 +6,7 @@ All four games have a dual-platform 0.2.0 implementation on `feature/idrive8-sup
 
 `shared/platform.js` chooses a renderer host from the capability reply. ID7 prefers `embed`, with `layer` as a fallback; ID8 uses `layer`. Geometry comes from `embedBox` or `appArea`, never a fixed screen resolution. The existing 1280x480 game drawing is scaled uniformly and centered in that box. Layer surfaces hide when their native page loses focus; embed keeps the established ID7 behavior.
 
-Each package contains ID7 and ID8 XML/JSON RHMI descriptions for the same root/menu/detail state names. ID8 uses `LT_State_Wide_List` and `LT_ScrollLabel`; its root title marker selects the platform path. Both platforms share the same icon, strings, UUIDs, game rules, menus and score storage. ID8 service declarations include the `remote2`, `entrypoint2` and `resourcemanagement2` interfaces. Package, release and source-manifest HMI declarations agree.
+Each package contains ID7 and ID8 XML/JSON RHMI descriptions for the same root/menu/detail state names. ID8 uses `LT_State_Wide_List` and `LT_ScrollLabel`; its root title marker selects the platform path. Both platforms share the same icon, strings, UUIDs, game rules, menus and score storage. ID8 service declarations include the `remote2`, `entrypoint2` and `resourcemanagement2` interfaces. Package, release and source-manifest HMI declarations agree. The packages require `mgu-deploy` 0.7.5 or newer: its firmware-aware manifest filtering removes unavailable ID8 interfaces on older ID7 units, preventing MainApp from rejecting a dual-platform package. The Store resolves this dependency before installing the game.
 
 ## Controller routing
 

@@ -1,7 +1,8 @@
 {
   "build": "node tools/build.js",
   "requires": {
-    "mgu-render": "0.6.9"
+    "mgu-render": "0.6.9",
+    "mgu-deploy": "0.7.5"
   },
   "uninstallable": true,
   "mguHmi": [
