@@ -16,3 +16,7 @@ The head unit links each app with its own SDK. Local SDK donors and
 head-unit emulator environments are not part of this repository.
 
 See [release tooling](../release/README.md) for build and publish commands.
+
+## Package size
+
+Run `npm run build` then `npm run size`. See [the measured comparison and budgets](APP_SIZES.md).

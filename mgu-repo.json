@@ -8,9 +8,28 @@
       "build": "unit",
       "title": "2048",
       "description": "2048 with animated tiles, controller menus and arcade high scores",
-      "requires": { "mgu-render": "0.6.9" },
+      "requires": {
+        "mgu-render": "0.6.9"
+      },
       "uninstallable": true,
-      "mguHmi": ["ID7"]
+      "mguHmi": [
+        "ID7"
+      ]
+    },
+    {
+      "id": "iabadia_minesweeper",
+      "kind": "app",
+      "path": "apps/iabadia_minesweeper",
+      "build": "unit",
+      "title": "Minesweeper",
+      "description": "Classic Minesweeper with controller input, safe first reveals and saved best times",
+      "requires": {
+        "mgu-render": "0.6.9"
+      },
+      "uninstallable": true,
+      "mguHmi": [
+        "ID7"
+      ]
     }
   ]
 }

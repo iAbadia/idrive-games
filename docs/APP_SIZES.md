@@ -1,0 +1,37 @@
+# App sizes
+
+Measured 2 November 2026. KiB = 1,024 bytes; MiB = 1,048,576 bytes.
+
+| App | Version | Compressed source package | Unpacked source |
+| --- | --- | ---: | ---: |
+| Minesweeper | 0.1.0 | 133.7 KiB | 272.3 KiB |
+| 2048 | 0.1.1 | 293.1 KiB | 495.4 KiB |
+| Waze on cluster | 0.4.1 | 28.7 KiB | Not measured |
+| Store | 0.9.16 | 1,408.7 KiB (1.38 MiB) | Not measured |
+
+Our sizes come from `npm run build` and `npm run size`. Comparison download
+sizes come from the published [idrive-apps catalog](https://github.com/robertnisipeanu/idrive-apps/releases/tag/catalog)
+and [mgu-store catalog](https://github.com/robertnisipeanu/mgu-store/releases/tag/catalog).
+All four entries use source packages built on the head unit. Waze's native
+map tool and cluster renderer are separate dependencies and are not included
+in its small app package. Likewise, our renderer is an existing shared tool,
+not duplicated in each game.
+
+These are app payload sizes, not installed disk usage or memory usage.
+The car links in its SDK; its exact output size has not been measured here.
+Branch installs fetch the repository archive, including documentation and
+other games, so total network transfer is larger than an individual package.
+The source packages themselves exclude screenshots, tests, preview tools,
+SDK modules and runtime saves.
+
+## Budget
+
+CI builds every game, then runs `npm run size`. Each game must fit within
+512 KiB compressed and 1 MiB unpacked source. The check also rejects packages
+containing preview, test, dependency or app-data directories.
+
+Minesweeper's initial package was 289.5 KiB. Removing unused regular 41/50 px
+and semibold 58/77/103 px font atlases reduced it to 133.7 KiB (54% smaller).
+The retained atlas data and font keys are unchanged; no glyph quality was
+reduced at the drawing sizes used by the game. Regenerate that subset with
+`node apps/iabadia_minesweeper/tools/trim_fonts.js` if the upstream fonts change.

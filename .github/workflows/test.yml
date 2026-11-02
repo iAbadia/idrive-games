@@ -24,4 +24,5 @@ jobs:
           "$RUNNER_TEMP/gitleaks" git . --redact --no-banner
       - run: npm test
       - run: npm run build
+      - run: npm run size
       - run: npm run check

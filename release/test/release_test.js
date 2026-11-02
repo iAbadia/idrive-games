@@ -133,8 +133,8 @@ test('the build tree holds a submodule at its recorded commit; one its checkout 
 
 test('2048 catalog declares its renderer dependency and ID7 compatibility', () => {
     const all = components();
-    assert.strictEqual(all.length, 1);
-    const app = all[0];
+    assert.strictEqual(all.length, 2);
+    const app = all.find(c => c.id === 'iabadia_2048');
     assert.strictEqual(app.id, 'iabadia_2048');
     assert.deepStrictEqual(app.mguHmi, ['ID7']);
     assert.deepStrictEqual(app.requires, { 'mgu-render': '0.6.9' });
