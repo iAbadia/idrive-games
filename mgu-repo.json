@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "components": [
+    {
+      "id": "iabadia_2048",
+      "kind": "app",
+      "path": "apps/iabadia_2048",
+      "build": "unit",
+      "title": "2048",
+      "description": "2048 with animated tiles, controller menus and arcade high scores",
+      "requires": { "mgu-render": "0.6.9" },
+      "uninstallable": true,
+      "mguHmi": ["ID7"]
+    }
+  ]
+}

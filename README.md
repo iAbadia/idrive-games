@@ -18,7 +18,7 @@ Games for BMW iDrive, built around the rotary controller and an OEM-inspired dar
 
 ## Install
 
-Add `iAbadia/idrive-games` in **Store → Settings → Add source**, choose **Releases**, then install a game. Keep the existing mgu-store source enabled for the renderer dependency. The head unit links each game against its own SDK.
+Add `iAbadia/idrive-games` in **Store → Settings → Add source**, choose the **main** branch, then install a game. Keep the existing mgu-store source enabled for the renderer dependency. The head unit links each game against its own SDK. Published versions can also be installed through **Releases** when available.
 
 ## Controls
 

@@ -142,6 +142,21 @@ test('2048 catalog declares its renderer dependency and ID7 compatibility', () =
 });
 
 let failed = 0;
+test('the Store branch manifest lists every game with matching source metadata', () => {
+    const root = path.resolve(__dirname, '../..');
+    const repo = JSON.parse(fs.readFileSync(path.join(root, 'mgu-repo.json'), 'utf8'));
+    assert.strictEqual(repo.schema, 1);
+    const apps = components().filter((c) => c.kind === 'app');
+    assert.deepStrictEqual(repo.components.map((c) => c.id).sort(), apps.map((c) => c.id).sort());
+    repo.components.forEach((c) => {
+        const app = apps.find((a) => a.id === c.id);
+        const manifest = JSON.parse(fs.readFileSync(path.join(root, c.path, 'mgu-app.json'), 'utf8'));
+        assert.strictEqual(c.kind, 'app'); assert.strictEqual(c.build, 'unit');
+        assert.strictEqual(manifest.id, c.id); assert.strictEqual(manifest.version, app.version);
+        assert.deepStrictEqual(c.requires, app.requires); assert.deepStrictEqual(c.mguHmi, app.mguHmi);
+        manifest.modules.forEach((m) => assert(fs.existsSync(path.join(root, c.path, m))));
+    });
+});
 tests.forEach((t) => {
     try {
         t.fn();
