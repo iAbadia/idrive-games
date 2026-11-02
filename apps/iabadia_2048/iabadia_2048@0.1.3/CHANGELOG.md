@@ -1,3 +1,7 @@
+# 0.1.3
+
+Reference-inspired gold tile icon with cream lettering, transparent 140×140 canvas and centered 116px artwork.
+
 # 0.1.2
 
 Remove unused font atlases, reducing the source package by 27% with identical rendered output.

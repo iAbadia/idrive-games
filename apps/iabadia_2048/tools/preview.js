@@ -24,10 +24,8 @@ function samples() {
     s.openMenu('scores'); fs.writeFileSync(path.join(out, 'scores.png'), png(s));
     s.enterInitials('scores'); s.arcade.draft.name = 'INA'; s.arcade.draft.cursor = 1;
     fs.writeFileSync(path.join(out, 'initials.png'), png(s));
-    const icon = new Canvas(140, 140);
-    icon.clear([0, 0, 0, 0]); icon.roundRect(12, 12, 116, 116, 10, '#edc22e');
-    icon.text('2048', 70, 81, 36, '#514322', { font: 'num', align: 'center' });
-    fs.writeFileSync(path.join(__dirname, '../iabadia_2048@0.1.2/rhmiData/variantGroups/Common/images/iabadia_2048_icon.png'), icon.png());
+    const tree = require('../mgu-app.json').tree;
+    fs.copyFileSync(path.join(__dirname, '../assets/icon.png'), path.join(__dirname, '..', tree, 'rhmiData/variantGroups/Common/images/iabadia_2048_icon.png'));
     console.log(out);
 }
 module.exports = { png };

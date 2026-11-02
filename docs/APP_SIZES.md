@@ -5,7 +5,7 @@ Measured 2 November 2026. KiB = 1,024 bytes; MiB = 1,048,576 bytes.
 | App | Version | Compressed source package | Unpacked source |
 | --- | --- | ---: | ---: |
 | Minesweeper | 0.1.2 | ~156 KiB | ~295 KiB |
-| 2048 | 0.1.2 | 213.7 KiB | 385.9 KiB |
+| 2048 | 0.1.3 | ~231 KiB | ~402 KiB |
 | Waze on cluster | 0.4.1 | 28.7 KiB | Not measured |
 | Store | 0.9.16 | 1,408.7 KiB (1.38 MiB) | Not measured |
 
@@ -42,3 +42,5 @@ of 87 rendered states and animation frames was byte-identical. The 103 px
 atlas remains necessary for the title; 58 px is used by initials and tile pops.
 
 Minesweeper 0.1.2 uses a richer reference-based launcher icon (about 23 KiB). Only the 140px production PNG ships; the large generated master is excluded.
+
+2048 0.1.3 adds a reference-inspired gold launcher tile (about 20 KiB PNG), retaining the optimized font subset.

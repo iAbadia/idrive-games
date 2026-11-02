@@ -45,7 +45,7 @@ async function lifecycle() {
         frame(r) { this.frames = (this.frames || 0) + 1; this.words = r.words().length; return true; } close() { this.closed = true; }
     }
     vm.runInNewContext(fs.readFileSync(path.join(ROOT, 'src/iabadia_2048.js'), 'utf8'), {
-        __dirname: path.join(ROOT, 'iabadia_2048@0.1.2/javascript'),
+        __dirname: path.join(ROOT, 'iabadia_2048@0.1.3/javascript'),
         require(name) {
             if (name.indexOf('OnlineApp') >= 0) return SDK;
             if (name.indexOf('logging') >= 0) return { getSDKLogger: () => log };

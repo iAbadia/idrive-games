@@ -38,6 +38,7 @@ function donorArg(argv) {
 function main() {
     const donor = donorArg(process.argv.slice(2));
     const m = link.readManifest(HERE);
+    fs.copyFileSync(path.join(HERE, 'assets/icon.png'), path.join(HERE, m.tree, 'rhmiData/variantGroups/Common/images/iabadia_2048_icon.png'));
     const src = path.join(HERE, `${m.id}@${m.version}.src.tgz`);
     const out = { source: path.basename(src), sourceMembers: link.packSource(HERE, src).length };
     if (donor) {

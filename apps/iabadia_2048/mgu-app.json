@@ -1,8 +1,8 @@
 {
   "schema": 1,
   "id": "iabadia_2048",
-  "version": "0.1.2",
-  "tree": "iabadia_2048@0.1.2",
+  "version": "0.1.3",
+  "tree": "iabadia_2048@0.1.3",
   "modules": [
     "src/iabadia_2048.js",
     "src/draw.js",
