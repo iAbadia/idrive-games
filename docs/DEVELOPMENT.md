@@ -31,3 +31,7 @@ Run `npm run build` then `npm run size`. See [the measured comparison and budget
 | Tetris | `npm run preview:tetris` | http://127.0.0.1:2052 |
 
 The [gallery media guide](media/README.md) covers screenshots and compact gameplay GIFs.
+
+## Platform research
+
+[ID8 compatibility investigation](IDRIVE8.md) records the current blockers, a reproducible capability probe and the proposed validation sequence. This branch does not enable ID8 installations.
