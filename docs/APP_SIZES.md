@@ -4,8 +4,8 @@ Measured 2 November 2026. KiB = 1,024 bytes; MiB = 1,048,576 bytes.
 
 | App | Version | Compressed source package | Unpacked source |
 | --- | --- | ---: | ---: |
-| Minesweeper | 0.1.0 | 133.7 KiB | 272.3 KiB |
-| 2048 | 0.1.1 | 293.1 KiB | 495.4 KiB |
+| Minesweeper | 0.1.1 | 134.3 KiB | 274.8 KiB |
+| 2048 | 0.1.2 | 213.7 KiB | 385.9 KiB |
 | Waze on cluster | 0.4.1 | 28.7 KiB | Not measured |
 | Store | 0.9.16 | 1,408.7 KiB (1.38 MiB) | Not measured |
 
@@ -35,3 +35,8 @@ and semibold 58/77/103 px font atlases reduced it to 133.7 KiB (54% smaller).
 The retained atlas data and font keys are unchanged; no glyph quality was
 reduced at the drawing sizes used by the game. Regenerate that subset with
 `node apps/iabadia_minesweeper/tools/trim_fonts.js` if the upstream fonts change.
+
+2048 0.1.2 removes unused regular 41/50 px and semibold 77 px atlases.
+Its package fell from 293.1 KiB to 213.7 KiB (27% smaller). A comparison
+of 87 rendered states and animation frames was byte-identical. The 103 px
+atlas remains necessary for the title; 58 px is used by initials and tile pops.

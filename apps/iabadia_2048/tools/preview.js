@@ -27,7 +27,7 @@ function samples() {
     const icon = new Canvas(140, 140);
     icon.clear([0, 0, 0, 0]); icon.roundRect(12, 12, 116, 116, 10, '#edc22e');
     icon.text('2048', 70, 81, 36, '#514322', { font: 'num', align: 'center' });
-    fs.writeFileSync(path.join(__dirname, '../iabadia_2048@0.1.1/rhmiData/variantGroups/Common/images/iabadia_2048_icon.png'), icon.png());
+    fs.writeFileSync(path.join(__dirname, '../iabadia_2048@0.1.2/rhmiData/variantGroups/Common/images/iabadia_2048_icon.png'), icon.png());
     console.log(out);
 }
 module.exports = { png };

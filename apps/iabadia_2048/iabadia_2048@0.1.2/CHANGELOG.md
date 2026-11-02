@@ -1,3 +1,7 @@
+# 0.1.2
+
+Remove unused font atlases, reducing the source package by 27% with identical rendered output.
+
 # 0.1.1
 
 140×140 app icon with transparent padding, sized to match the iDrive app grid.
