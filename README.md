@@ -13,6 +13,7 @@ Games for BMW iDrive, built around the rotary controller and an OEM-inspired dar
 | Game | Features | Platform |
 | --- | --- | --- |
 | [2048](apps/iabadia_2048) | Animated tiles, rotary menus, saved progress and an arcade top five with three-letter initials | iDrive 7 |
+| [Snake](apps/iabadia_snake) | Wheel steering, three speeds, saved progress and named high scores | iDrive 7 |
 | [Minesweeper](apps/iabadia_minesweeper) | Three difficulties, safe first reveals, flags, saved games and best times | iDrive 7 |
 
 ![2048 gameplay](apps/iabadia_2048/preview/game.png)
@@ -23,7 +24,7 @@ Add `iAbadia/idrive-games` in **Store → Settings → Add source**, choose the 
 
 ## Controls
 
-**2048:** tilt to move; press to pause. **Minesweeper:** tilt to move the cursor; use the wheel to choose Reveal, Flag or Menu, then press. Both games use wheel or up/down for menu navigation.
+**2048:** tilt to move; press to pause. **Minesweeper:** tilt to move the cursor; use the wheel to choose Reveal, Flag or Menu, then press. **Snake:** turn the wheel clockwise/right or counterclockwise/left to steer; press to pause. All games use wheel or up/down for menu navigation.
 
 ## Development
 

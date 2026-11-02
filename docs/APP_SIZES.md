@@ -4,6 +4,7 @@ Measured 2 November 2026. KiB = 1,024 bytes; MiB = 1,048,576 bytes.
 
 | App | Version | Compressed source package | Unpacked source |
 | --- | --- | ---: | ---: |
+| Snake | 0.1.0 | ~134 KiB | ~269 KiB |
 | Minesweeper | 0.1.2 | ~156 KiB | ~295 KiB |
 | 2048 | 0.1.3 | ~231 KiB | ~402 KiB |
 | Waze on cluster | 0.4.1 | 28.7 KiB | Not measured |
@@ -12,7 +13,7 @@ Measured 2 November 2026. KiB = 1,024 bytes; MiB = 1,048,576 bytes.
 Our sizes come from `npm run build` and `npm run size`. Comparison download
 sizes come from the published [idrive-apps catalog](https://github.com/robertnisipeanu/idrive-apps/releases/tag/catalog)
 and [mgu-store catalog](https://github.com/robertnisipeanu/mgu-store/releases/tag/catalog).
-All four entries use source packages built on the head unit. Waze's native
+All five entries use source packages built on the head unit. Waze's native
 map tool and cluster renderer are separate dependencies and are not included
 in its small app package. Likewise, our renderer is an existing shared tool,
 not duplicated in each game.
@@ -44,3 +45,5 @@ atlas remains necessary for the title; 58 px is used by initials and tile pops.
 Minesweeper 0.1.2 uses a richer reference-based launcher icon (about 23 KiB). Only the 140px production PNG ships; the large generated master is excluded.
 
 2048 0.1.3 adds a reference-inspired gold launcher tile (about 20 KiB PNG), retaining the optimized font subset.
+
+Snake reuses the small Minesweeper font subset and ships a 3 KiB vector-rendered launcher icon, with no third-party game engine or runtime npm packages.

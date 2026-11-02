@@ -8,11 +8,12 @@
     "node": ">=22"
   },
   "scripts": {
-    "test": "node apps/iabadia_2048/tools/test.js && node apps/iabadia_2048/tools/test_app.js && node apps/iabadia_minesweeper/tools/test.js && node apps/iabadia_minesweeper/tools/test_app.js && node release/test/release_test.js",
-    "build": "node apps/iabadia_2048/tools/build.js && node apps/iabadia_minesweeper/tools/build.js",
+    "test": "node apps/iabadia_2048/tools/test.js && node apps/iabadia_2048/tools/test_app.js && node apps/iabadia_minesweeper/tools/test.js && node apps/iabadia_minesweeper/tools/test_app.js && node release/test/release_test.js && node apps/iabadia_snake/tools/test.js && node apps/iabadia_snake/tools/test_app.js",
+    "build": "node apps/iabadia_2048/tools/build.js && node apps/iabadia_minesweeper/tools/build.js && node apps/iabadia_snake/tools/build.js",
     "preview": "node apps/iabadia_2048/tools/serve.js",
     "check": "node release/release.js check",
     "preview:minesweeper": "node apps/iabadia_minesweeper/tools/serve.js",
-    "size": "node tools/check_sizes.js"
+    "size": "node tools/check_sizes.js",
+    "preview:snake": "node apps/iabadia_snake/tools/serve.js"
   }
 }
