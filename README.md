@@ -1,0 +1,43 @@
+<p align="center"><img src="docs/assets/header.svg" alt="iDrive Games — Games made for the controller" width="100%"></p>
+
+<p align="center">
+  <a href="https://github.com/iAbadia/idrive-games/actions/workflows/test.yml"><img src="https://github.com/iAbadia/idrive-games/actions/workflows/test.yml/badge.svg" alt="Build and tests"></a>
+  <img src="https://img.shields.io/badge/iDrive-7-173953" alt="iDrive 7">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0--or--later-555" alt="GPL-3.0-or-later"></a>
+</p>
+
+Games for BMW iDrive, built around the rotary controller and an OEM-inspired dark interface. Installed and updated through the [mgu Store](https://github.com/robertnisipeanu/mgu-store).
+
+## Games
+
+| Game | Features | Status |
+| --- | --- | --- |
+| [2048](apps/iabadia_2048) | Animated tiles, rotary menus, saved progress and an arcade top five with three-letter initials | In development · iDrive 7 |
+
+![2048 gameplay](apps/iabadia_2048/preview/game.png)
+
+## Install
+
+**The first car-ready release is pending head-unit validation.** Desktop tests pass; emulator and physical-car testing remain outstanding.
+
+Once released, add `iAbadia/idrive-games` in **Store → Settings → Add source**, choose **Releases**, then install a game. Keep the existing mgu-store source enabled for the renderer dependency. The head unit links each game against its own SDK.
+
+## Controls
+
+Tilt to move; press the controller to pause. Turn the wheel or tilt up/down to navigate menus. In initials entry, turn to choose a letter, press to confirm, and tilt left/right to move the cursor.
+
+## Development
+
+Node.js 22+ and Git. No npm dependencies are required.
+
+```sh
+npm test
+npm run build
+npm run preview
+```
+
+The desktop preview opens at `http://127.0.0.1:2048`. See the [2048 guide](apps/iabadia_2048) for keyboard controls and the [release guide](release) for packaging.
+
+## Credits & license
+
+GPL-3.0-or-later. Built on [mgu-store](https://github.com/robertnisipeanu/mgu-store) and the community [idrive7-apps](https://github.com/cauliflowermossgrape/idrive7-apps) drawing kit. Bundled MIT and font licenses are retained; see [THIRD_PARTY.md](THIRD_PARTY.md). No BMW SDK or firmware files are distributed. This is an independent community project, not affiliated with BMW.

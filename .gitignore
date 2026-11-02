@@ -1,0 +1,15 @@
+node_modules/
+*.tgz
+release/out/
+release/published/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.log
+data/
+coverage/
+.DS_Store

@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "id": "iabadia_2048",
+  "version": "0.1.0",
+  "tree": "iabadia_2048@0.1.0",
+  "modules": [
+    "src/iabadia_2048.js",
+    "src/draw.js",
+    "src/font_regular.js",
+    "src/font_semibold.js",
+    "src/game.js",
+    "src/kit_canvas.js",
+    "src/kit_fonts.js",
+    "src/kit_record.js",
+    "src/mgu_render_client.js",
+    "src/session.js",
+    "src/storage.js",
+    "src/leaderboard.js"
+  ],
+  "sdk": [
+    "oap-sdk/src/core/OnlineApp.js",
+    "oap-sdk/src/logging/logging"
+  ]
+}
