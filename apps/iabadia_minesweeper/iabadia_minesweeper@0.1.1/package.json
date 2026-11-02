@@ -1,6 +1,6 @@
 {
   "name": "iabadia_minesweeper",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Minesweeper for the iDrive controller",
   "private": false,
   "main": "javascript/runner.js",

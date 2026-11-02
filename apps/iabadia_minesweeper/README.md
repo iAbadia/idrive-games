@@ -25,7 +25,7 @@ flags can expose a mine when chording.
 | Expert | 30 × 16 | 99 |
 
 The board, flags, cursor and elapsed time persist in the app's data folder.
-Best completion times are kept separately for each difficulty. The clock
+One best completion time and three-letter name are kept for each difficulty. A new fastest win opens initials entry: wheel or up/down changes a letter, center confirms and advances, and left/right moves the cursor. Confirming the third letter saves the name. Older records retain their times and show `---` until replaced. The clock
 starts on the first reveal and pauses while menus are open or the app is hidden.
 New game and difficulty changes require confirmation, with Cancel selected first.
 

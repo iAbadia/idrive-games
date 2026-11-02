@@ -48,11 +48,23 @@ function draw(session, now) {
     r.roundRect(bx-5,by-5,w+10,h+10,5,[0,0,0,90]);
     const mx=30,my=24,mw=390;
     r.roundRect(mx,my,mw,432,7,'#141416');
-    r.text({pause:'Paused',won:'Minefield cleared',lost:'Mine hit',confirm:'Start a new game?',difficulty:'Difficulty',times:'Best times',help:'How to play'}[session.menu],mx+24,my+51,29,'#ffffff',{font:'bold'});
+    r.text({initials:'New best time',pause:'Paused',won:'Minefield cleared',lost:'Mine hit',confirm:'Start a new game?',difficulty:'Difficulty',times:'Best times',help:'How to play'}[session.menu],mx+24,my+51,29,'#ffffff',{font:'bold'});
+    if (session.menu==='initials') {
+        r.text(time(g.best[g.level]),mx+24,my+100,32,'#edcf72',{font:'num'});
+        session.initials.split('').forEach((letter,i)=>{
+            const x=mx+28+i*112;
+            r.roundRect(x,my+145,100,85,5,i===session.letter?'#173953':'#252528');
+            r.text(letter,x+50,my+205,42,'#ffffff',{align:'center',font:'num'});
+            if(i===session.letter)r.fillRect(x+12,my+225,76,3,'#59b9ed');
+        });
+        ['Wheel or up/down: change letter','Left/right: move between letters','Press: next letter; third saves'].forEach((text,i)=>r.text(text,mx+24,my+285+i*30,19,'#bdbdc3'));
+        if(session.notice)r.text(session.notice,mx+24,my+409,17,'#f2b179');
+        return r;
+    }
     if (session.menu==='confirm') r.text('Current progress will be replaced.',mx+24,my+100,19,'#a6a6ab');
     if (session.menu==='help') [ 'Tilt to move the blue cursor.', 'Wheel: Reveal, Flag or Menu.', 'Press to perform that action.', '', 'Numbers count neighboring mines.', 'Flag mines; reveal every safe cell.', 'Press a revealed number to clear', 'its neighbors when flags match.' ].forEach((s,i)=>r.text(s,mx+24,my+93+i*29,19,'#ceced2'));
     if (session.menu==='times') Object.keys(LEVELS).forEach((k,i)=>{
-        r.text(LEVELS[k].label,mx+24,my+120+i*54,23,'#ceced2');
+        r.text(LEVELS[k].label+'  '+(g.names[k] || '---'),mx+24,my+120+i*54,23,'#ceced2');
         r.text(time(g.best[k]),mx+mw-24,my+120+i*54,24,'#edcf72',{align:'right',font:'num'});
     });
     const start = ['times','help'].indexOf(session.menu)>=0 ? my+356 : session.menu==='confirm' ? my+226 : my+87;

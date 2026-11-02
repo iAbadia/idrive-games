@@ -10,11 +10,12 @@ function valid(s) {
         ['revealed', 'flags'].every(k => Array.isArray(s[k]) && s[k].length === n && s[k].every(v => typeof v === 'boolean')) &&
         s.revealed.every((v,i) => !v || !s.flags[i]) && Number.isInteger(s.cursor) && s.cursor >= 0 && s.cursor < n &&
         Number.isFinite(s.elapsed) && s.elapsed >= 0 && s.elapsed <= 31536000000 &&
+        (s.names === undefined || (s.names && Object.keys(LEVELS).every(k => s.names[k] === null || /^[A-Z]{3}$/.test(s.names[k])))) &&
         s.best && Object.keys(LEVELS).every(k => s.best[k] === null || (Number.isFinite(s.best[k]) && s.best[k] >= 0));
 }
 class Game {
     constructor(saved, random) {
-        this.random = random || Math.random;
+        this.random = random || Math.random; this.names = { beginner: null, intermediate: null, expert: null };
         if (valid(saved)) Object.assign(this, JSON.parse(JSON.stringify(saved)));
         else { this.best = { beginner: null, intermediate: null, expert: null }; this.newGame('beginner'); }
     }
@@ -75,7 +76,7 @@ class Game {
         return changed;
     }
     snapshot() {
-        return { version: 1, level: this.level, status: this.status, mines: this.mines.slice(), revealed: this.revealed.slice(), flags: this.flags.slice(), cursor: this.cursor, elapsed: this.elapsed, best: Object.assign({}, this.best) };
+        return { version: 1, level: this.level, status: this.status, mines: this.mines.slice(), revealed: this.revealed.slice(), flags: this.flags.slice(), cursor: this.cursor, elapsed: this.elapsed, best: Object.assign({}, this.best), names: Object.assign({}, this.names) };
     }
 }
 module.exports = { Game, LEVELS, valid };

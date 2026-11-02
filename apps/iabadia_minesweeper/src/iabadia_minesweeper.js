@@ -137,7 +137,7 @@ class AppMinesweeper extends OnlineApp {
         this.navigating = true;
         try {
             let target;
-            while (this.visible && !this.ending && (target = !this.session.menu ? 1 : ['confirm', 'help', 'difficulty', 'times'].indexOf(this.session.menu) >= 0 ? 3 : 2) !== this.depth) {
+            while (this.visible && !this.ending && (target = !this.session.menu ? 1 : ['confirm', 'help', 'difficulty', 'times', 'initials'].indexOf(this.session.menu) >= 0 ? 3 : 2) !== this.depth) {
                 if (this.depth < target) {
                     const name = STATES[this.depth++];
                     try { await this.rhmiApplication.openState(name); }

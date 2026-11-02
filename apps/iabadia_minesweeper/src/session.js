@@ -7,7 +7,7 @@ class Session {
     constructor(saved, opts) {
         this.opts = opts || {}; this.game = new Game(saved, this.opts.random); this.visible = false;
         this.menu = saved ? 'pause' : null; this.focus = 0; this.mode = 0; this.last = null; this.stamp = null; this.notice = '';
-        this.pendingLevel = this.game.level; this.pulse = null; this.save();
+        this.initials = 'AAA'; this.letter = 0; this.pendingLevel = this.game.level; this.pulse = null; this.save();
     }
     now() { return this.opts.now ? this.opts.now() : Date.now(); }
     advance(now) {
@@ -25,12 +25,13 @@ class Session {
     changed() { if (this.opts.change) this.opts.change(); }
     openMenu(kind) { this.advance(); this.menu = kind || (this.game.ended() ? this.game.status : 'pause'); this.focus = 0; this.pulse = null; }
     labels() {
+        if (this.menu === 'initials') return [];
         if (this.menu === 'confirm') return ['Cancel', 'Start new game'];
         if (this.menu === 'difficulty') return Object.keys(LEVELS).map(k => LEVELS[k].label).concat(['Back to menu']);
         if (this.menu === 'help' || this.menu === 'times') return ['Back to menu'];
         return (this.game.ended() ? [] : ['Resume']).concat(['New game', 'Difficulty', 'Best times', 'How to play', 'Exit app']);
     }
-    visibility(on) { this.advance(); if (!on) { this.openMenu(); this.save(); } this.visible = on; this.stamp = this.now(); this.last = null; if (on && this.game.ended()) this.openMenu(); this.changed(); }
+    visibility(on) { this.advance(); if (!on) { if(this.menu !== 'initials') this.openMenu(); this.save(); } this.visible = on; this.stamp = this.now(); this.last = null; if (on && this.game.ended()) this.openMenu(this.game.status === 'won' && this.game.names[this.game.level] === null && this.game.best[this.game.level] === this.game.elapsed ? 'initials' : undefined); this.changed(); }
     select() {
         const label = this.labels()[this.focus];
         if (label === 'Resume') { this.menu = null; this.mode = 0; }
@@ -50,6 +51,17 @@ class Session {
     input(action, amount) {
         if (!this.visible) return;
         this.advance();
+        if (this.menu === 'initials') {
+            if (action === 'rotate' || action === 'up' || action === 'down') {
+                const chars = this.initials.split(''), delta = action === 'rotate' ? amount : action === 'up' ? 1 : -1;
+                chars[this.letter] = String.fromCharCode(65 + ((chars[this.letter].charCodeAt(0)-65+delta)%26+26)%26); this.initials = chars.join('');
+            } else if (action === 'left' || action === 'right') this.letter = Math.max(0,Math.min(2,this.letter+(action==='left'?-1:1)));
+            else if (action === 'center') {
+                if (this.letter < 2) this.letter++;
+                else { this.game.names[this.game.level] = this.initials; this.save(); if (!this.notice) this.openMenu('won'); }
+            } else if (action === 'back') this.openMenu('won');
+            this.changed(); return;
+        }
         if (this.menu) {
             if (action === 'rotate' || action === 'up' || action === 'down') this.focus = Math.max(0, Math.min(this.labels().length - 1, this.focus + (action === 'rotate' ? amount : action === 'up' ? -1 : 1)));
             else if (action === 'center') this.select();
@@ -65,9 +77,9 @@ class Session {
                     this.pulse = { cell: this.game.cursor, started: this.now() };
                     if (this.game.status === 'won') {
                         const best = this.game.best[this.game.level];
-                        if (best === null || this.game.elapsed < best) this.game.best[this.game.level] = this.game.elapsed;
+                        if (best === null || this.game.elapsed < best) { this.game.best[this.game.level] = this.game.elapsed; this.game.names[this.game.level] = null; this.initials = 'AAA'; this.letter = 0; this.newRecord = true; }
                     }
-                    if (this.game.ended()) this.openMenu();
+                    if (this.game.ended()) { this.openMenu(this.newRecord ? 'initials' : undefined); this.newRecord = false; }
                     this.save();
                 }
             }
