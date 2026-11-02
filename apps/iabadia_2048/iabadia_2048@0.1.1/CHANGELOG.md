@@ -1,3 +1,7 @@
+# 0.1.1
+
+140×140 app icon with transparent padding, sized to match the iDrive app grid.
+
 # 0.1.0
 
 2048 with directional controller input, a rotary pause menu and saved progress.
