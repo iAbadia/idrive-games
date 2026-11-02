@@ -178,6 +178,11 @@ class AppSnake extends OnlineApp {
     async exitApp() {
         this.visible = false; this.updateVisibility();
         await this.navigationTask;
+        if (this.directInput) {
+            const input = this.directInput; this.directInput = null;
+            if (this.inputVia === 'direct') this.ready = false;
+            await input.close();
+        }
         this.navigating = true;
         try {
             while (this.depth > 1) await this.rhmiApplication.closeState(STATES[--this.depth]);

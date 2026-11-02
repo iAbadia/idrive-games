@@ -58,11 +58,11 @@ async function lifecycle(id,hmi,direct){
   gpu.emit('close');assert(!gpu.shown&&!gpu.grabbed&&!app.session.visible);
   gpu.emit('ready',{},info);await until(()=>app.ready&&app.session.visible);assert.equal(app.session.menu,'pause');
   if(direct){
-   gpu.emit('ready',{},Object.assign({},id8,{controller:true}));assert.equal(app.inputVia,'renderer');const before=actions.length;callback({frontRotaryEncoderOperation:20,frontRotaryEncoderPushButton:1,frontRotaryEncoderDeflection:1});assert.equal(actions.length,before);
+   gpu.emit('ready',{},Object.assign({},id8,{controller:true}));assert.equal(app.inputVia,'renderer');const before=actions.length;callback({frontRotaryEncoderOperation:20,frontRotaryEncoderPushButton:1,frontRotaryEncoderDeflection:1});assert.equal(actions.length,before);gpu.emit('ready',{},info);await until(()=>app.inputVia==='direct'&&app.ready);
   }
   // Real menu actions must close the native stack and release input.
   app.session.openMenu();app.session.focus=app.session.labels().indexOf('Exit app');app.session.input('center');await until(()=>closed.some(n=>!n.endsWith('_Menu')&&!n.endsWith('_Detail')));
-  assert(!gpu.shown&&!gpu.grabbed&&!app.session.visible);
+  assert(!gpu.shown&&!gpu.grabbed&&!app.session.visible);if(direct){assert.equal(unsubscribed,1);assert.equal(app.directInput,null);}
   await app.shutdown();assert(gpu.closed);if(direct)assert.equal(unsubscribed,1);
   console.log('ok '+id+' '+hmi+' '+(direct?'direct FrontCCU':'renderer controller')+': controls, menus, focus, reconnect, source switching and exit');
  }finally{await app.shutdown();}

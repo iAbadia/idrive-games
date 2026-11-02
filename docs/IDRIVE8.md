@@ -16,7 +16,7 @@ Each package contains ID7 and ID8 XML/JSON RHMI descriptions for the same root/m
 | ID8 without renderer capture | Direct SDK `FrontCCU.statusRotaryEncoderState` subscription, instance 1 |
 | ID7 without renderer capture | Existing controller-required status; gameplay stays inactive |
 
-The direct path converts numeric or named SDK enums into the same `knob`, `press` and `tilt` values used by the game sessions. Those sessions preserve wheel direction, wraparound handling and held-input suppression. Only one input source acts at a time, and samples are ignored while the game is hidden or inactive. Subscriptions are released at shutdown, including a subscription that finishes after shutdown. An unavailable subscription leaves gameplay inactive; reopening retries it.
+The direct path converts numeric or named SDK enums into the same `knob`, `press` and `tilt` values used by the game sessions. Those sessions preserve wheel direction, wraparound handling and held-input suppression. Only one input source acts at a time, and samples are ignored while the game is hidden or inactive. Subscriptions are released on app exit and shutdown, including a subscription that finishes after shutdown. An unavailable subscription leaves gameplay inactive; reopening retries it.
 
 **Receiving inputs is the branch's working assumption. Direct subscription does not establish exclusive capture.** The current renderer's capture hook targets ID7's `HmiMain3D`; direct FrontCCU does not silence the ID8 HMI. Native focus movement or other BMW reactions could still compete with gameplay. This must be checked in the target runtime before merging. No HMI injection, system configuration changes or new renderer hooks are included.
 

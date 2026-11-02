@@ -1,3 +1,10 @@
+# 0.2.0
+
+Dual ID7/ID8 RHMI resources, automatic renderer host selection, and scaled layer placement.
+ID8 direct FrontCCU fallback preserves the existing wheel, tilt and center controls.
+Requires mgu-deploy 0.7.5+ for firmware-aware manifest filtering.
+ID8 runtime validation remains pending.
+
 # 0.1.3
 
 Reference-inspired gold tile icon with cream lettering, transparent 140Ã—140 canvas and centered 116px artwork.
