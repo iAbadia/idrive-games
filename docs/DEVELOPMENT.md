@@ -28,6 +28,7 @@ Run `npm run build` then `npm run size`. See [the measured comparison and budget
 | 2048 | `npm run preview` | http://127.0.0.1:2048 |
 | Minesweeper | `npm run preview:minesweeper` | http://127.0.0.1:2050 |
 | Snake | `npm run preview:snake` | http://127.0.0.1:2051 |
+| Space Invaders | `npm run preview:invaders` | http://127.0.0.1:2053 |
 | Tetris | `npm run preview:tetris` | http://127.0.0.1:2052 |
 
 The [gallery media guide](media/README.md) covers screenshots and compact gameplay GIFs.

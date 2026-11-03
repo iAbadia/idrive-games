@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "1.3.0",
+  "application": {
+    "uuid": "87e83c1e-8b15-4d30-bc80-82c547c329fb",
+    "type": "OnlineApp",
+    "name": "iabadia_invaders",
+    "vendor": "iAbadia",
+    "version": "0.1.0",
+    "defaultLanguage": "en_GB",
+    "uiDescriptions": [
+      {
+        "applicationFilePath": "./uiDescriptions/ID7/application.xml",
+        "uiDescriptionFilePath": "./uiDescriptions/ID7/uiDescription.json",
+        "hmi": [
+          "ID7"
+        ]
+      }
+    ],
+    "stringBundleUuid": "4860f4f0-36b5-489d-bed8-da79829f28f2",
+    "resourceBundleUuid": "6be51850-9810-4300-a9fb-9e1d7ebaf004",
+    "variantGroups": [
+      {
+        "stringsPath": "./variantGroups/Common/texts",
+        "resourcesPath": "./variantGroups/Common/images",
+        "hmi": [
+          "ID7"
+        ],
+        "brands": [
+          "BMW"
+        ]
+      }
+    ],
+    "entryPoints": [
+      {
+        "name": "iabadia_invaders",
+        "uuid": "f07f630a-d967-4c5c-bd00-01783fd488f6",
+        "textId": "SID_Invaders_TITLE",
+        "insertionStateId": 20974,
+        "insertionFocusId": 2,
+        "insertionMode": "INSERT_BELOW",
+        "insertionOrder": 0,
+        "insertionPriority": 0,
+        "previewType": "NONE",
+        "bookmarkable": true,
+        "private": null,
+        "appearance": "DEFAULT",
+        "isGroupHeader": false,
+        "insertionGroup": 0,
+        "icon": "iabadia_invaders_icon.png"
+      }
+    ]
+  }
+}

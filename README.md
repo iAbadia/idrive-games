@@ -39,6 +39,14 @@ Games for BMW iDrive, built around the rotary controller and an OEM-inspired dar
 <a href="apps/iabadia_tetris/preview/game.png">Full-size screenshot</a> · <a href="apps/iabadia_tetris#controls">Controls</a>
 </td>
 </tr>
+<tr>
+<td colspan="2" valign="top">
+<h3><img src="apps/iabadia_invaders/assets/icon.png" width="32" height="32" alt=""> <a href="apps/iabadia_invaders">Space Invaders</a></h3>
+<img src="docs/media/invaders.gif" alt="Space Invaders gameplay" width="480">
+<p>Defend Earth with wheel movement, automatic firing, destructible shields and increasingly fast waves. Three difficulties and named high scores.</p>
+<a href="apps/iabadia_invaders/preview/game.png">Full-size screenshot</a> · <a href="apps/iabadia_invaders#controls">Controls</a>
+</td>
+</tr>
 </table>
 
 <sub>Short gameplay loops rendered from each game’s own drawing code. All games save progress and use wheel or up/down navigation in their pause menus.</sub>
@@ -62,6 +70,10 @@ Games for BMW iDrive, built around the rotary controller and an OEM-inspired dar
 
 ![Tetris screenshot](apps/iabadia_tetris/preview/game.png)
 
+### Space Invaders
+
+![Space Invaders screenshot](apps/iabadia_invaders/preview/game.png)
+
 </details>
 
 ## Install
@@ -75,9 +87,10 @@ Add `iAbadia/idrive-games` in **Store → Settings → Add source**, choose the 
 | 2048 | Tilt to slide the tiles |
 | Minesweeper | Tilt to move; wheel to choose Reveal, Flag or Menu; press to act |
 | Snake | Wheel clockwise to turn right; counterclockwise to turn left |
+| Space Invaders | Wheel or left/right tilt to move; automatic firing; press to pause |
 | Tetris | Wheel to slide; left/right tilt to rotate; down/up for soft/hard drop |
 
-Press to pause in 2048, Snake and Tetris. Every pause menu supports the wheel or up/down, with center to confirm.
+Press to pause in 2048, Snake, Tetris and Space Invaders. Every pause menu supports the wheel or up/down, with center to confirm.
 
 ## Development
 
@@ -89,7 +102,7 @@ npm run build
 npm run preview
 ```
 
-The default preview opens at `http://127.0.0.1:2048`. See the [development notes](docs/DEVELOPMENT.md) for all four previews, [media guide](docs/media) to regenerate the gallery, and [release guide](release) for packaging.
+The default preview opens at `http://127.0.0.1:2048`. See the [development notes](docs/DEVELOPMENT.md) for all five previews, [media guide](docs/media) to regenerate the gallery, and [release guide](release) for packaging.
 
 ## Credits & license
 

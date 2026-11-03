@@ -79,6 +79,9 @@ records.push(capture('tetris',10,s=>{
  if(phase>=8&&phase<=18&&phase%2===0)s.input('down');
  if(phase===20)s.input('up');
 },175));
+records.push(capture('invaders',8,s=>{s.input('rotate',1);},(s,f)=>{
+ if(f%6===0){const target=380+260*Math.sin(f/27),delta=Math.round((target-s.game.target)/18);if(delta)s.input('rotate',delta);}
+},130));
 try{
  const out=path.join(root,'docs/media');fs.mkdirSync(out,{recursive:true});
  const r=cp.spawnSync(process.env.PYTHON||'python',[path.join(__dirname,'encode_gallery.py'),temp,out],{stdio:'inherit'});

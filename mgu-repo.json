@@ -60,6 +60,21 @@
       "mguHmi": [
         "ID7"
       ]
+    },
+    {
+      "id": "iabadia_invaders",
+      "kind": "app",
+      "path": "apps/iabadia_invaders",
+      "build": "unit",
+      "title": "Space Invaders",
+      "description": "Arcade invaders with rotary movement, automatic firing, shields, waves and saved high scores",
+      "requires": {
+        "mgu-render": "0.6.9"
+      },
+      "uninstallable": true,
+      "mguHmi": [
+        "ID7"
+      ]
     }
   ]
 }
