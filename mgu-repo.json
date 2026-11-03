@@ -2,6 +2,21 @@
   "schema": 1,
   "components": [
     {
+      "id": "iabadia_m_arcade",
+      "kind": "app",
+      "path": "apps/iabadia_m_arcade",
+      "build": "unit",
+      "title": "M Arcade",
+      "description": "Six games in one controller-first arcade, with shared menus, progress and named records",
+      "requires": {
+        "mgu-render": "0.6.9"
+      },
+      "uninstallable": true,
+      "mguHmi": [
+        "ID7"
+      ]
+    },
+    {
       "id": "iabadia_2048",
       "kind": "app",
       "path": "apps/iabadia_2048",

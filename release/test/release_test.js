@@ -131,9 +131,13 @@ test('the build tree holds a submodule at its recorded commit; one its checkout 
     assert.throws(() => exportHead(main), /git archive 1{40} in third_party[\\/]lib failed/);
 });
 
-test('2048 catalog declares its renderer dependency and ID7 compatibility', () => {
+test('M Arcade and standalone catalog entries retain renderer and ID7 metadata', () => {
     const all = components();
-    assert.strictEqual(all.length, 6);
+    assert.deepStrictEqual(all.map(c=>c.id).sort(), ['iabadia_2048','iabadia_breakout','iabadia_invaders','iabadia_m_arcade','iabadia_minesweeper','iabadia_snake','iabadia_tetris']);
+    const arcade=all.find(c=>c.id==='iabadia_m_arcade');
+    assert.strictEqual(arcade.title,'M Arcade');
+    assert.deepStrictEqual(arcade.mguHmi,['ID7']);
+    assert.deepStrictEqual(arcade.requires,{'mgu-render':'0.6.9'});
     const app = all.find(c => c.id === 'iabadia_2048');
     assert.strictEqual(app.id, 'iabadia_2048');
     assert.deepStrictEqual(app.mguHmi, ['ID7']);

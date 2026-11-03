@@ -25,7 +25,8 @@ Run `npm run build` then `npm run size`. See [the measured comparison and budget
 
 | Game | Command | URL |
 | --- | --- | --- |
-| 2048 | `npm run preview` | http://127.0.0.1:2048 |
+| M Arcade | `npm run preview:arcade` | http://127.0.0.1:2055 |
+| 2048 | `npm run preview:2048` | http://127.0.0.1:2048 |
 | Minesweeper | `npm run preview:minesweeper` | http://127.0.0.1:2050 |
 | Snake | `npm run preview:snake` | http://127.0.0.1:2051 |
 | Space Invaders | `npm run preview:invaders` | http://127.0.0.1:2053 |
@@ -34,6 +35,6 @@ Run `npm run build` then `npm run size`. See [the measured comparison and budget
 
 The [gallery media guide](media/README.md) covers screenshots and compact gameplay GIFs.
 
-## M Arcade design
+## M Arcade
 
-The [M Arcade architecture proposal](architecture/M_ARCADE.md) describes the shared shell, game contract, persistence, packaging and migration plan. This branch does not replace the released standalone apps. New collection icons follow the repository [M Arcade Icons skill](../.agents/skills/m-arcade-icons/SKILL.md).
+The [M Arcade architecture](architecture/M_ARCADE.md) documents the implemented shared shell, game contract, persistence, packaging and save import. Canonical source is `apps/iabadia_m_arcade/src/`; its build generates the committed flat module aliases in `package-src/`. The standalone releases remain available. New collection icons follow the repository [M Arcade Icons skill](../.agents/skills/m-arcade-icons/SKILL.md).

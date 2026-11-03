@@ -8,6 +8,14 @@
 
 Games for BMW iDrive, built around the rotary controller and an OEM-inspired dark interface. Installed and updated through the [mgu Store](https://github.com/robertnisipeanu/mgu-store).
 
+## M Arcade
+
+[**M Arcade**](apps/iabadia_m_arcade) brings all six games into one installed app, with a controller-driven library, shared menus, saved progress and named records. Available on the `feature/m-arcade` branch while the existing standalone releases remain available.
+
+![M Arcade game library](apps/iabadia_m_arcade/preview/library.png)
+
+Run `npm run preview:arcade` to try the combined app at [localhost:2055](http://127.0.0.1:2055/). See the [architecture](docs/architecture/M_ARCADE.md) for adding games and the [save importer](apps/iabadia_m_arcade#import-existing-saves) for transferring existing progress.
+
 ## Games
 
 <table>
@@ -113,7 +121,7 @@ npm run build
 npm run preview
 ```
 
-The default preview opens at `http://127.0.0.1:2048`. See the [development notes](docs/DEVELOPMENT.md) for all six previews, [media guide](docs/media) to regenerate the gallery, and [release guide](release) for packaging.
+The default preview opens M Arcade at `http://127.0.0.1:2055`. The original 2048 preview is available through `npm run preview:2048`. See the [development notes](docs/DEVELOPMENT.md) for all previews, [media guide](docs/media) to regenerate the gallery, and [release guide](release) for packaging.
 
 ## Credits & license
 
