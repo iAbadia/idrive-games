@@ -40,11 +40,17 @@ Games for BMW iDrive, built around the rotary controller and an OEM-inspired dar
 </td>
 </tr>
 <tr>
-<td colspan="2" valign="top">
+<td width="50%" valign="top">
 <h3><img src="apps/iabadia_invaders/assets/icon.png" width="32" height="32" alt=""> <a href="apps/iabadia_invaders">Space Invaders</a></h3>
 <img src="docs/media/invaders.gif" alt="Space Invaders gameplay" width="480">
 <p>Defend Earth with wheel movement, automatic firing, destructible shields and increasingly fast waves. Three difficulties and named high scores.</p>
 <a href="apps/iabadia_invaders/preview/game.png">Full-size screenshot</a> · <a href="apps/iabadia_invaders#controls">Controls</a>
+</td>
+<td width="50%" valign="top">
+<h3><img src="apps/iabadia_breakout/assets/icon.png" width="32" height="32" alt=""> <a href="apps/iabadia_breakout">Breakout</a></h3>
+<img src="docs/media/breakout.gif" alt="Breakout gameplay" width="100%">
+<p>Aim the ball with the paddle edges and clear tougher brick walls. Three difficulties, saved progress and named high scores.</p>
+<a href="apps/iabadia_breakout/preview/game.png">Full-size screenshot</a> · <a href="apps/iabadia_breakout#controls">Controls</a>
 </td>
 </tr>
 </table>
@@ -74,6 +80,10 @@ Games for BMW iDrive, built around the rotary controller and an OEM-inspired dar
 
 ![Space Invaders screenshot](apps/iabadia_invaders/preview/game.png)
 
+### Breakout
+
+![Breakout screenshot](apps/iabadia_breakout/preview/game.png)
+
 </details>
 
 ## Install
@@ -88,9 +98,10 @@ Add `iAbadia/idrive-games` in **Store → Settings → Add source**, choose the 
 | Minesweeper | Tilt to move; wheel to choose Reveal, Flag or Menu; press to act |
 | Snake | Wheel clockwise to turn right; counterclockwise to turn left |
 | Space Invaders | Wheel or left/right tilt to move; automatic firing; press to pause |
+| Breakout | Wheel or left/right tilt to move the paddle; press to pause |
 | Tetris | Wheel to slide; left/right tilt to rotate; down/up for soft/hard drop |
 
-Press to pause in 2048, Snake, Tetris and Space Invaders. Every pause menu supports the wheel or up/down, with center to confirm.
+Press to pause in 2048, Snake, Tetris, Space Invaders and Breakout. Every pause menu supports the wheel or up/down, with center to confirm.
 
 ## Development
 
@@ -102,7 +113,7 @@ npm run build
 npm run preview
 ```
 
-The default preview opens at `http://127.0.0.1:2048`. See the [development notes](docs/DEVELOPMENT.md) for all five previews, [media guide](docs/media) to regenerate the gallery, and [release guide](release) for packaging.
+The default preview opens at `http://127.0.0.1:2048`. See the [development notes](docs/DEVELOPMENT.md) for all six previews, [media guide](docs/media) to regenerate the gallery, and [release guide](release) for packaging.
 
 ## Credits & license
 

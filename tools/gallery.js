@@ -82,6 +82,12 @@ records.push(capture('tetris',10,s=>{
 records.push(capture('invaders',8,s=>{s.input('rotate',1);},(s,f)=>{
  if(f%6===0){const target=380+260*Math.sin(f/27),delta=Math.round((target-s.game.target)/18);if(delta)s.input('rotate',delta);}
 },130));
+function breakoutPilot(s){
+ const g=s.game,b=g.ball;let target=b.x;
+ if(!g.serve&&b.vy>0){const projected=b.x+b.vx*(374-b.y)/b.vy,span=750;let u=((projected-5)%(2*span)+2*span)%(2*span);target=5+(u<=span?u:2*span-u);}
+ const delta=Math.round((target-g.target)/20);if(delta)s.input('rotate',delta);
+}
+records.push(capture('breakout',8,s=>{s.input('rotate',1);for(let i=0;i<120;i++){if(i%3===0)breakoutPilot(s);s.game.tick(50);}s.stamp=s.now();},(s,f)=>{if(f%3===0)breakoutPilot(s);},130));
 try{
  const out=path.join(root,'docs/media');fs.mkdirSync(out,{recursive:true});
  const r=cp.spawnSync(process.env.PYTHON||'python',[path.join(__dirname,'encode_gallery.py'),temp,out],{stdio:'inherit'});

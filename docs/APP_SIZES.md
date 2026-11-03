@@ -5,6 +5,7 @@ Measured 2 November 2026. KiB = 1,024 bytes; MiB = 1,048,576 bytes.
 | App | Version | Compressed source package | Unpacked source |
 | --- | --- | ---: | ---: |
 | Space Invaders | 0.1.1 | ~153 KiB | ~289 KiB |
+| Breakout | 0.1.0 | ~135 KiB | ~271 KiB |
 | Tetris | 0.1.1 | ~153 KiB | ~290 KiB |
 | Snake | 0.1.1 | ~154 KiB | ~289 KiB |
 | Minesweeper | 0.1.3 | ~156 KiB | ~296 KiB |
@@ -15,7 +16,7 @@ Measured 2 November 2026. KiB = 1,024 bytes; MiB = 1,048,576 bytes.
 Our sizes come from `npm run build` and `npm run size`. Comparison download
 sizes come from the published [idrive-apps catalog](https://github.com/robertnisipeanu/idrive-apps/releases/tag/catalog)
 and [mgu-store catalog](https://github.com/robertnisipeanu/mgu-store/releases/tag/catalog).
-All seven entries use source packages built on the head unit. Waze's native
+All eight entries use source packages built on the head unit. Waze's native
 map tool and cluster renderer are separate dependencies and are not included
 in its small app package. Likewise, our renderer is an existing shared tool,
 not duplicated in each game.
@@ -53,3 +54,5 @@ Snake reuses the small Minesweeper font subset and ships a small padded launcher
 Tetris uses the same small font subset and shared renderer. Its game rules, next-piece preview and ghost outline add no external engine or npm runtime dependencies.
 
 Space Invaders uses original code-drawn sprites and the small font subset. It ships no game engine, ROM, sound files or large textures.
+
+Breakout uses original code-drawn bricks, ball and paddle with the existing small font subset. No physics engine, textures or sound files are bundled.

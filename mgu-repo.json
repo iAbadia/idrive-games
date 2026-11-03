@@ -75,6 +75,21 @@
       "mguHmi": [
         "ID7"
       ]
+    },
+    {
+      "id": "iabadia_breakout",
+      "kind": "app",
+      "path": "apps/iabadia_breakout",
+      "build": "unit",
+      "title": "Breakout",
+      "description": "Rotary paddle control, angled ball bounces, brick waves and saved arcade scores",
+      "requires": {
+        "mgu-render": "0.6.9"
+      },
+      "uninstallable": true,
+      "mguHmi": [
+        "ID7"
+      ]
     }
   ]
 }
