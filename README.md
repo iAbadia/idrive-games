@@ -12,7 +12,7 @@ Games for BMW iDrive, built around the rotary controller and an OEM-inspired dar
 
 [**M Arcade**](apps/iabadia_m_arcade) brings all six games into one installed app, with a controller-driven library, shared menus, saved progress and named records. Available on the `feature/m-arcade` branch while the existing standalone releases remain available.
 
-![M Arcade game library](apps/iabadia_m_arcade/preview/library.png)
+![M Arcade game carousel](apps/iabadia_m_arcade/preview/carousel.gif)
 
 Run `npm run preview:arcade` to try the combined app at [localhost:2055](http://127.0.0.1:2055/). See the [architecture](docs/architecture/M_ARCADE.md) for adding games and the [save importer](apps/iabadia_m_arcade#import-existing-saves) for transferring existing progress.
 

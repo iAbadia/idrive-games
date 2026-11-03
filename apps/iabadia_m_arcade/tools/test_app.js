@@ -336,7 +336,7 @@ async function wire() {
         ccu(1, 0, 0);
         await until(() => s.runtime !== null);
         assert.equal(s.definition.id, '2048');
-        assert(gpu.sent.image.size === 6);
+        assert(gpu.sent.image.size >= 5);
         gpu.grab(false);
         gpu.show(false);
         await until(() =>

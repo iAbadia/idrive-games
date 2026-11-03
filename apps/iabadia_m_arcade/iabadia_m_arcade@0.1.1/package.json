@@ -1,6 +1,6 @@
 {
   "name": "iabadia_m_arcade",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "M Arcade for the iDrive controller",
   "private": false,
   "main": "javascript/runner.js",

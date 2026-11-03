@@ -2,7 +2,7 @@
 <h1 align="center">M Arcade</h1>
 <p align="center">Six classics. One app. Built for the iDrive controller.</p>
 
-![Game library](preview/library.png)
+![Animated game carousel](preview/carousel.gif)
 
 2048, Minesweeper, Snake, Tetris, Space Invaders and Breakout share one game library, pause menu and record system. Each game keeps its progress when you return to the library. 2048 keeps an arcade top five; the other games keep one named record per difficulty, with fastest winning times for Minesweeper.
 
@@ -10,7 +10,7 @@
 
 | Screen | Controls |
 | --- | --- |
-| Library | Wheel to browse, tilt to navigate, center to open |
+| Library | Wheel or tilt to browse the wrapping carousel; center to open |
 | Menus | Wheel or up/down to select; center to confirm |
 | Gameplay | Original game controls; center to pause |
 | Minesweeper | Center performs Reveal/Flag; wheel selects actions including Menu |

@@ -77,8 +77,8 @@ function name(s) {
 test('library owns wheel/tilt input; center opens the selected module', () => {
     const { s } = harness();
     s.input('down');
-    assert.equal(s.selected, 2);
-    s.input('rotate', 3);
+    assert.equal(s.selected, 1);
+    s.input('rotate', 4);
     assert.equal(s.selected, 5);
     s.input('center');
     assert.equal(s.definition.id, 'breakout');
@@ -416,7 +416,7 @@ test('all shipped PNG icons decode with true transparent exterior and cache iden
         /Invalid/,
     );
     const library = draw(harness().s, icons);
-    assert.equal(library.images.size, 6);
+    assert.equal(library.images.size, 5);
 });
 test('source packaging namespaces same-basename modules and preserves static dependencies', () => {
     const { rewrite, generate } = require('./build.js');
@@ -588,5 +588,74 @@ test('unknown preview actions are ignored and timer completion cannot consume me
     assert.equal(s.menu, 'initials');
     assert.equal(s.envelope.initialsDraft.name, 'AAA');
 });
-test('font budget keeps the merge-pop atlas without the unused large title atlas',()=>{const fonts=require('../src/kit/kit_fonts.js'),face=require('../src/kit/font_semibold.js');assert.equal(fonts.get('num',49).size,58);assert(!face.sizes.some(v=>v.size===103));});
+test('font budget keeps the merge-pop atlas without the unused large title atlas', () => {
+    const fonts = require('../src/kit/kit_fonts.js'),
+        face = require('../src/kit/font_semibold.js');
+    assert.equal(fonts.get('num', 49).size, 58);
+    assert(!face.sizes.some((v) => v.size === 103));
+});
+test('carousel wraps in both directions and wheel retargeting never jumps', () => {
+    const { s, step } = harness();
+    s.input('rotate', -1);
+    assert.equal(s.selected, 5);
+    assert.equal(s.carousel.position(s.now()), 0);
+    assert(s.animating());
+    step(90);
+    const before = s.carousel.position(s.now());
+    assert(before < 0 && before > -1);
+    const frame = JSON.stringify(s.carousel.motion);
+    draw(s, icons);
+    assert.equal(JSON.stringify(s.carousel.motion), frame);
+    s.input('rotate', 1);
+    assert.equal(s.selected, 0);
+    assert.equal(s.carousel.position(s.now()), before);
+    step(400);
+    assert.equal(s.carousel.position(s.now()), 0);
+    assert(!s.animating());
+    s.input('left');
+    assert.equal(s.selected, 5);
+    step(400);
+    s.input('right');
+    assert.equal(s.selected, 0);
+});
+test('carousel uses the UI clock, settles its last frame and opens the target immediately', () => {
+    const { s, step, store } = harness();
+    const clock = s.clock;
+    s.input('rotate', 3);
+    assert(s.animating());
+    assert.equal(s.clock, clock);
+    const position = s.carousel.position(s.now());
+    step(80);
+    assert.notEqual(s.carousel.position(s.now()), position);
+    assert.equal(s.clock, clock);
+    s.input('center');
+    assert.equal(s.definition.id, 'tetris');
+    assert.equal(s.route, 'game');
+    assert(!s.carousel.motion);
+    s.leave();
+    s.input('rotate', 1);
+    s.visibility(false);
+    step(1000);
+    s.visibility(true);
+    assert.equal(s.carousel.position(s.now()), s.carousel.target);
+    assert(!s.animating());
+    const restored = harness(store).s;
+    assert.equal(restored.selected, s.selected);
+    assert.equal(restored.carousel.position(restored.now()), restored.selected);
+});
+test('carousel seam renders continuous frames with bounded cached image use', () => {
+    const { s, step } = harness();
+    const a = png(s);
+    s.input('rotate', -1);
+    step(50);
+    const b = png(s);
+    step(400);
+    const c = png(s);
+    assert(!a.equals(b));
+    assert(!b.equals(c));
+    assert.equal(s.selected, 5);
+    const r = draw(s, icons);
+    assert(r.images.size <= games.length);
+    assert(!s.carousel.advance(s.now()));
+});
 console.log(passed + ' M Arcade integration tests passed');

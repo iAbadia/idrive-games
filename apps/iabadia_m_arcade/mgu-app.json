@@ -1,10 +1,11 @@
 {
   "schema": 1,
   "id": "iabadia_m_arcade",
-  "version": "0.1.0",
-  "tree": "iabadia_m_arcade@0.1.0",
+  "version": "0.1.1",
+  "tree": "iabadia_m_arcade@0.1.1",
   "modules": [
     "package-src/app.js",
+    "package-src/core_carousel.js",
     "package-src/core_input.js",
     "package-src/core_registry.js",
     "package-src/core_runtime.js",

@@ -11,12 +11,13 @@ apps/iabadia_m_arcade/
     core/
       registry.js             static game definitions and loaders
       session.js              routes, menus, initials, clock and active runtime
+      carousel.js             looping UI selection and retargetable easing
       runtime.js              common adapter mechanics and snapshot contract
       input.js                one normalized CCU input source
       saves.js                bounded, atomic per-game saves and migrations
       scores.js               ranking policies, run identity and stable ties
     ui/
-      draw.js                 library, HUD, common menus and name entry
+      draw.js                 carousel, HUD, common menus and name entry
       theme.js                shared colour and layout tokens
       icons.js / png.js       cached, bounded RGBA icon loading
     games/<id>/
@@ -26,7 +27,7 @@ apps/iabadia_m_arcade/
       board.js                board-only drawing; no menus or advancement
     kit/                      one renderer client, drawing kit and font set
   package-src/                generated flat modules for the existing unit linker
-  iabadia_m_arcade@0.1.0/      native resources, licenses and packaged icons
+  iabadia_m_arcade@0.1.1/      native resources, licenses and packaged icons
   assets/                     canonical launcher/game PNGs
   tools/                      build, preview, tests, launcher and offline import
 ```
@@ -58,7 +59,7 @@ Returning to the library checkpoints and disposes the active runtime. Selecting 
 
 | Route | Wheel | Tilt | Center | Native Back |
 | --- | --- | --- | --- | --- |
-| Library | Browse games | Two-column grid | Open selected game | Exit |
+| Library | Browse games | Previous/next game | Open selected game | Exit |
 | Gameplay | Game mapping | Game mapping | Pause, or game-defined action | Checkpoint and return to library |
 | Pause | Select option | Up/down select | Confirm | Resume |
 | Detail | Route-specific | Route-specific | Confirm | Return to menu |
@@ -66,7 +67,7 @@ Returning to the library checkpoints and disposes the active runtime. Selecting 
 
 Four native hosts represent **Library -> Game -> Menu -> Detail**. Back is handled through native focus/depth changes, not an invented raw Back event. Navigation waits while a popup owns focus. Focus loss, renderer loss and app hiding pause the game and release controller ownership; reconnect never resumes timed play automatically. Input baselines reset across routes/focus so a held press cannot confirm twice or move the board behind a menu.
 
-The shared menu includes Resume/Keep playing where supported, New game, Difficulty where available, Records, How to play, Back to Arcade and Exit M Arcade. The library remembers its selection, marks saved games and paginates in groups of six.
+The shared menu includes Resume/Keep playing where supported, New game, Difficulty where available, Records, How to play, Back to Arcade and Exit M Arcade. The library remembers its selection and marks saved games. Its looping carousel uses an independent UI clock, cubic easing, depth/scale changes and continuous retargeting during rapid wheel turns. Rendering only samples the animation; the shared scheduler requests frames until it settles. Launch selects the target immediately, and hiding cancels pending UI motion.
 
 ## Persistence and score policies
 

@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 'use strict';
 const crypto = require('crypto');
+const { Carousel } = require('./core_carousel.js');
 const registry = require('./core_registry.js'),
     scores = require('./core_scores.js'),
     { Input } = require('./core_input.js'),
@@ -37,6 +38,7 @@ class Session {
         } catch (e) {
             this.notice = e.message;
         }
+        this.carousel = new Carousel(registry.games.length, this.selected);
     }
     now() {
         return this.opts.now ? this.opts.now() : Date.now();
@@ -97,6 +99,7 @@ class Session {
     }
     activate(id) {
         if (this.runtime || this.pendingLeave) return false;
+        this.carousel.snap(this.selected);
         const def = registry.get(id);
         if (!def) return false;
         try {
@@ -219,6 +222,7 @@ class Session {
         this.changed();
     }
     visibility(on) {
+        if (!on) this.carousel.snap(this.selected);
         if (!on && this.runtime) {
             this.runtime.pause();
             if (!this.menu) this.menu = 'pause';
@@ -233,6 +237,8 @@ class Session {
         now = now === undefined ? this.now() : now;
         const elapsed = this.stamp === null ? 0 : Math.max(0, now - this.stamp);
         this.stamp = now;
+        if (this.visible && this.route === 'library')
+            return this.carousel.advance(now);
         if (
             !this.visible ||
             this.route !== 'game' ||
@@ -255,6 +261,8 @@ class Session {
         return !!e.dirty || wasAnimating || previousMenu !== this.menu;
     }
     animating() {
+        if (this.visible && this.route === 'library')
+            return this.carousel.active(this.now());
         return !!(
             this.visible &&
             this.runtime &&
@@ -472,12 +480,9 @@ class Session {
                           : action === 'right'
                             ? 1
                             : action === 'up'
-                              ? -2
-                              : 2;
-                this.selected = Math.max(
-                    0,
-                    Math.min(registry.games.length - 1, this.selected + n),
-                );
+                              ? -1
+                              : 1;
+                this.selected = this.carousel.move(n, this.now());
                 this.notice = '';
                 this.shellSave();
             }

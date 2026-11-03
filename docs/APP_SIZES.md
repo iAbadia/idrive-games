@@ -4,7 +4,7 @@ M Arcade measured 3 November 2026; standalone apps and Store comparisons measure
 
 | App | Version | Compressed source package | Unpacked source |
 | --- | --- | ---: | ---: |
-| **M Arcade (all six games)** | **0.1.0** | **~309 KiB** | **~529 KiB** |
+| **M Arcade (all six games)** | **0.1.1** | **~310 KiB** | **~533 KiB** |
 | Space Invaders | 0.1.1 | ~153 KiB | ~289 KiB |
 | Breakout | 0.1.1 | ~153 KiB | ~289 KiB |
 | Tetris | 0.1.1 | ~153 KiB | ~290 KiB |
@@ -14,7 +14,7 @@ M Arcade measured 3 November 2026; standalone apps and Store comparisons measure
 | Waze on cluster | 0.4.1 | 28.7 KiB | Not measured |
 | Store | 0.9.16 | 1,408.7 KiB (1.38 MiB) | Not measured |
 
-M Arcade replaces approximately **998 KiB** of separate game packages with **309 KiB**: about **69% smaller** for the compressed source payload. It includes one renderer client, drawing kit and font set.
+M Arcade replaces approximately **998 KiB** of separate game packages with **310 KiB**: about **69% smaller** for the compressed source payload. It includes one renderer client, drawing kit and font set.
 
 Our sizes come from `npm run build` and `npm run size`. Comparison download
 sizes come from the published [idrive-apps catalog](https://github.com/robertnisipeanu/idrive-apps/releases/tag/catalog)

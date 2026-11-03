@@ -110,11 +110,14 @@ function generate() {
     const modules = ['app.js']
         .concat(outputs.filter((n) => n !== 'app.js').sort())
         .map((n) => 'package-src/' + n);
+    const release = JSON.parse(
+        fs.readFileSync(path.join(ROOT, 'mgu-app.json'), 'utf8'),
+    );
     const m = {
         schema: 1,
         id: 'iabadia_m_arcade',
-        version: '0.1.0',
-        tree: 'iabadia_m_arcade@0.1.0',
+        version: release.version,
+        tree: release.tree,
         modules,
         sdk: ['oap-sdk/src/core/OnlineApp.js', 'oap-sdk/src/logging/logging'],
     };
