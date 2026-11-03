@@ -1,6 +1,6 @@
 # M Arcade architecture
 
-Implemented on `feature/m-arcade` for ID7. One native OAP app, `iabadia_m_arcade`, contains all six games. Standalone releases remain available during migration; ID8 integration stays on its separate branch. Local, linked-package and mocked native checks are distinct from parked-car validation.
+Implemented on `feature/m-arcade` for ID7. One native OAP app, `iabadia_m_arcade`, contains all six games. Standalone sources are frozen legacy references and excluded from Store/release discovery; ID8 integration stays on its separate branch. Local, linked-package and mocked native checks are distinct from parked-car validation.
 
 ## Source map
 
@@ -32,7 +32,7 @@ apps/iabadia_m_arcade/
   tools/                      build, preview, tests, launcher and offline import
 ```
 
-Edit `src/`, then run the build to refresh `package-src/`. Generated modules are committed so Store branch installs can use the existing on-unit linker directly. Both trees are checked by tests, including launching an actually linked bundle against SDK test doubles. The source package includes the flat modules and native resources once; it excludes canonical source copies, tools, SDK code, tests, screenshots and user saves.
+Edit `src/`, then run the build to refresh `package-src/`. Generated modules are committed so Store branch installs can use the existing on-unit linker directly. Both trees are checked by tests, including launching an actually linked bundle against SDK test doubles. Only M Arcade has an active `release.json` and Store manifest entry. Standalone metadata is retained as `legacy-release.json`; see [legacy policy](../LEGACY_GAMES.md). The source package includes the flat modules and native resources once; it excludes canonical source copies, tools, SDK code, tests, screenshots and user saves.
 
 ```mermaid
 flowchart TD
@@ -108,4 +108,4 @@ See [the import instructions](../../apps/iabadia_m_arcade/README.md#import-exist
 4. Add a 140px icon using the [M Arcade Icons skill](../../.agents/skills/m-arcade-icons/SKILL.md), rule/contract tests and help text. No separate native app, menu, font copy or transport is needed.
 5. Run `npm test`, `npm run build`, `npm run size` and the reproducibility check after committing. Review the desktop preview and validate native behavior before release.
 
-The six existing models are retained as standalone-compatible snapshots; new M Arcade development belongs in the modular source tree. Public standalone releases remain unchanged. ID8 work is intentionally separate.
+The six standalone implementations are retained as frozen snapshots; new game development belongs only in the modular M Arcade source tree. Standalone app sources remain unchanged except for legacy documentation and release-registration retirement. ID8 work is intentionally separate.

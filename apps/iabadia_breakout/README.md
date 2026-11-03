@@ -1,3 +1,5 @@
+> **Legacy standalone implementation.** This branch distributes the game through [M Arcade](../iabadia_m_arcade). This source is retained for regression tests and save migration; new development belongs in M Arcade.
+
 <p><img src="assets/icon.png" alt="Breakout icon" width="96" height="96"></p>
 
 # Breakout

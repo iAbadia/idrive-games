@@ -20,7 +20,7 @@ Native Back returns from a game to the library, from a pause menu to the game, a
 
 ## Install and preview
 
-In the Store, add `iAbadia/idrive-games`, select branch `feature/m-arcade` and install **M Arcade**. Keep the mgu-store source enabled for Renderer 0.6.9 or newer. One M Arcade installation contains every game; the standalone entries remain available during migration.
+In the Store, add `iAbadia/idrive-games`, select branch `feature/m-arcade` and install **M Arcade**. Keep the mgu-store source enabled for Renderer 0.6.9 or newer. This branch exposes only M Arcade, containing every game. The standalone source is retained as [legacy reference](../../docs/LEGACY_GAMES.md); existing installations and saves are left untouched.
 
 For the desktop preview, run `npm run preview:arcade` at the repository root and open [localhost:2055](http://127.0.0.1:2055/). It uses the same models, input router and board/menu drawings as the native app.
 
