@@ -1,8 +1,8 @@
 {
   "schema": 1,
   "id": "iabadia_m_arcade",
-  "version": "0.1.1",
-  "tree": "iabadia_m_arcade@0.1.1",
+  "version": "0.1.2",
+  "tree": "iabadia_m_arcade@0.1.2",
   "modules": [
     "package-src/app.js",
     "package-src/core_carousel.js",

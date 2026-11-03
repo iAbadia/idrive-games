@@ -27,9 +27,9 @@ apps/iabadia_m_arcade/
       board.js                board-only drawing; no menus or advancement
     kit/                      one renderer client, drawing kit and font set
   package-src/                generated flat modules for the existing unit linker
-  iabadia_m_arcade@0.1.1/      native resources, licenses and packaged icons
+  iabadia_m_arcade@0.1.2/      native resources, licenses and packaged icons
   assets/                     canonical launcher/game PNGs
-  tools/                      build, preview, tests, launcher and offline import
+  tools/                      build, preview, tests and offline import
 ```
 
 Edit `src/`, then run the build to refresh `package-src/`. Generated modules are committed so Store branch installs can use the existing on-unit linker directly. Both trees are checked by tests, including launching an actually linked bundle against SDK test doubles. Only M Arcade has an active `release.json` and Store manifest entry. Standalone metadata is retained as `legacy-release.json`; see [legacy policy](../LEGACY_GAMES.md). The source package includes the flat modules and native resources once; it excludes canonical source copies, tools, SDK code, tests, screenshots and user saves.
