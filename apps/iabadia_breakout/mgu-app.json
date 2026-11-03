@@ -1,8 +1,8 @@
 {
   "schema": 1,
   "id": "iabadia_breakout",
-  "version": "0.1.0",
-  "tree": "iabadia_breakout@0.1.0",
+  "version": "0.1.1",
+  "tree": "iabadia_breakout@0.1.1",
   "modules": [
     "src/iabadia_breakout.js",
     "src/draw.js",

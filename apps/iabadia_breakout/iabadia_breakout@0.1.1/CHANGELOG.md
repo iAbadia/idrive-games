@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1
+
+- Orange reference-based launcher icon with transparent safe padding.
+
 ## 0.1.0
 
 - Rotary paddle movement, automatic serves and edge-aimed ball rebounds.

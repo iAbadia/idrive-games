@@ -12,4 +12,4 @@ Tetris uses the same drawing kit, renderer client and Inter font subset, with th
 
 Space Invaders uses the same drawing kit, renderer client and Inter font subset with their retained notices. Its game code and in-game pixel artwork are original; the launcher icon is adapted from user-supplied artwork; no ROM, commercial sprites or audio are distributed.
 
-Breakout uses the same drawing kit, renderer client and Inter font subset with retained notices. Its rules and launcher artwork are original code; no external engine or commercial game assets are bundled.
+Breakout uses the same drawing kit, renderer client and Inter font subset with retained notices. Its rules and in-game drawing are original code; the launcher icon is adapted from user-supplied artwork; no external engine or commercial game assets are bundled.

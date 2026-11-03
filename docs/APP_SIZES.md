@@ -5,7 +5,7 @@ Measured 2 November 2026. KiB = 1,024 bytes; MiB = 1,048,576 bytes.
 | App | Version | Compressed source package | Unpacked source |
 | --- | --- | ---: | ---: |
 | Space Invaders | 0.1.1 | ~153 KiB | ~289 KiB |
-| Breakout | 0.1.0 | ~135 KiB | ~271 KiB |
+| Breakout | 0.1.1 | ~153 KiB | ~289 KiB |
 | Tetris | 0.1.1 | ~153 KiB | ~290 KiB |
 | Snake | 0.1.1 | ~154 KiB | ~289 KiB |
 | Minesweeper | 0.1.3 | ~156 KiB | ~296 KiB |
