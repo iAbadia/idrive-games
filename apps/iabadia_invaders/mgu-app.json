@@ -1,8 +1,8 @@
 {
   "schema": 1,
   "id": "iabadia_invaders",
-  "version": "0.1.0",
-  "tree": "iabadia_invaders@0.1.0",
+  "version": "0.1.1",
+  "tree": "iabadia_invaders@0.1.1",
   "modules": [
     "src/iabadia_invaders.js",
     "src/draw.js",

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1
+
+- Purple reference-based launcher icon with transparent safe padding.
+
 ## 0.1.0
 
 - Rotary ship movement with automatic firing and native pause menus.
