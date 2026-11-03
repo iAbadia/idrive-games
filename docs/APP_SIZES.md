@@ -1,9 +1,10 @@
 # App sizes
 
-Measured 2 November 2026. KiB = 1,024 bytes; MiB = 1,048,576 bytes.
+M Arcade measured 3 November 2026; standalone apps and Store comparisons measured 2 November 2026. KiB = 1,024 bytes; MiB = 1,048,576 bytes.
 
 | App | Version | Compressed source package | Unpacked source |
 | --- | --- | ---: | ---: |
+| **M Arcade (all six games)** | **0.1.1** | **~310 KiB** | **~533 KiB** |
 | Space Invaders | 0.1.1 | ~153 KiB | ~289 KiB |
 | Breakout | 0.1.1 | ~153 KiB | ~289 KiB |
 | Tetris | 0.1.1 | ~153 KiB | ~290 KiB |
@@ -13,10 +14,12 @@ Measured 2 November 2026. KiB = 1,024 bytes; MiB = 1,048,576 bytes.
 | Waze on cluster | 0.4.1 | 28.7 KiB | Not measured |
 | Store | 0.9.16 | 1,408.7 KiB (1.38 MiB) | Not measured |
 
-Our sizes come from `npm run build` and `npm run size`. Comparison download
+M Arcade replaces approximately **998 KiB** of separate game packages with **310 KiB**: about **69% smaller** for the compressed source payload. It includes one renderer client, drawing kit and font set.
+
+The M Arcade size comes from `npm run build` and `npm run size`. Standalone sizes are retained historical comparisons from before retirement; `npm run build:legacy` can reproduce their packages. Comparison download
 sizes come from the published [idrive-apps catalog](https://github.com/robertnisipeanu/idrive-apps/releases/tag/catalog)
 and [mgu-store catalog](https://github.com/robertnisipeanu/mgu-store/releases/tag/catalog).
-All eight entries use source packages built on the head unit. Waze's native
+All entries use source packages built on the head unit. Waze's native
 map tool and cluster renderer are separate dependencies and are not included
 in its small app package. Likewise, our renderer is an existing shared tool,
 not duplicated in each game.
@@ -30,7 +33,7 @@ SDK modules and runtime saves.
 
 ## Budget
 
-CI builds every game, then runs `npm run size`. Each game must fit within
+CI builds M Arcade, then runs `npm run size`. The active app must fit within
 512 KiB compressed and 1 MiB unpacked source. The check also rejects packages
 containing preview, test, dependency or app-data directories.
 

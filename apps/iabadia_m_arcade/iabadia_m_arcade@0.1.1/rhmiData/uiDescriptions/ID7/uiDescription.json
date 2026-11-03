@@ -1,0 +1,189 @@
+{
+  "schemaVersion": "1.3.0",
+  "containers": {
+    "1": {
+      "type": "state",
+      "name": "ST_OnlineApps_MArcade",
+      "components": {
+        "110": {
+          "type": "title",
+          "name": "gameTitle",
+          "properties": {
+            "Visible": {
+              "value": 1,
+              "type": "UInt"
+            }
+          },
+          "rows": [
+            {
+              "Text": {
+                "value": "SID_MArcade_TITLE",
+                "type": "StringId"
+              }
+            }
+          ]
+        },
+        "120": {
+          "type": "label",
+          "name": "gameStatus",
+          "properties": {
+            "Visible": {
+              "value": 1,
+              "type": "UInt"
+            },
+            "Focusable": {
+              "value": 0,
+              "type": "UInt"
+            }
+          },
+          "rows": [
+            {
+              "Text": {
+                "value": "Connecting to renderer\u2026",
+                "type": "Text"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "2": {
+      "type": "state",
+      "name": "ST_OnlineApps_MArcade_Game",
+      "components": {
+        "210": {
+          "type": "title",
+          "name": "gameTitle_Game",
+          "properties": {
+            "Visible": {
+              "value": 1,
+              "type": "UInt"
+            }
+          },
+          "rows": [
+            {
+              "Text": {
+                "value": "SID_MArcade_TITLE",
+                "type": "StringId"
+              }
+            }
+          ]
+        },
+        "220": {
+          "type": "label",
+          "name": "gameStatus_Game",
+          "properties": {
+            "Visible": {
+              "value": 1,
+              "type": "UInt"
+            },
+            "Focusable": {
+              "value": 0,
+              "type": "UInt"
+            }
+          },
+          "rows": [
+            {
+              "Text": {
+                "value": "Connecting to renderer\u2026",
+                "type": "Text"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "3": {
+      "type": "state",
+      "name": "ST_OnlineApps_MArcade_Menu",
+      "components": {
+        "310": {
+          "type": "title",
+          "name": "gameTitle_Menu",
+          "properties": {
+            "Visible": {
+              "value": 1,
+              "type": "UInt"
+            }
+          },
+          "rows": [
+            {
+              "Text": {
+                "value": "SID_MArcade_TITLE",
+                "type": "StringId"
+              }
+            }
+          ]
+        },
+        "320": {
+          "type": "label",
+          "name": "gameStatus_Menu",
+          "properties": {
+            "Visible": {
+              "value": 1,
+              "type": "UInt"
+            },
+            "Focusable": {
+              "value": 0,
+              "type": "UInt"
+            }
+          },
+          "rows": [
+            {
+              "Text": {
+                "value": "Connecting to renderer\u2026",
+                "type": "Text"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "4": {
+      "type": "state",
+      "name": "ST_OnlineApps_MArcade_Detail",
+      "components": {
+        "410": {
+          "type": "title",
+          "name": "gameTitle_Detail",
+          "properties": {
+            "Visible": {
+              "value": 1,
+              "type": "UInt"
+            }
+          },
+          "rows": [
+            {
+              "Text": {
+                "value": "SID_MArcade_TITLE",
+                "type": "StringId"
+              }
+            }
+          ]
+        },
+        "420": {
+          "type": "label",
+          "name": "gameStatus_Detail",
+          "properties": {
+            "Visible": {
+              "value": 1,
+              "type": "UInt"
+            },
+            "Focusable": {
+              "value": 0,
+              "type": "UInt"
+            }
+          },
+          "rows": [
+            {
+              "Text": {
+                "value": "Connecting to renderer\u2026",
+                "type": "Text"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

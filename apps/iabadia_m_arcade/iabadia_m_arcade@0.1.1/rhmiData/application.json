@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "1.3.0",
+  "application": {
+    "uuid": "e17aec7c-d021-47b9-8ae2-1b2460436f4d",
+    "type": "OnlineApp",
+    "name": "iabadia_m_arcade",
+    "vendor": "iAbadia",
+    "version": "0.1.1",
+    "defaultLanguage": "en_GB",
+    "uiDescriptions": [
+      {
+        "applicationFilePath": "./uiDescriptions/ID7/application.xml",
+        "uiDescriptionFilePath": "./uiDescriptions/ID7/uiDescription.json",
+        "hmi": [
+          "ID7"
+        ]
+      }
+    ],
+    "stringBundleUuid": "2329ff40-41b4-4556-ac63-8fbd65a281fb",
+    "resourceBundleUuid": "f73810e0-faed-40c7-913b-8897660ae04b",
+    "variantGroups": [
+      {
+        "stringsPath": "./variantGroups/Common/texts",
+        "resourcesPath": "./variantGroups/Common/images",
+        "hmi": [
+          "ID7"
+        ],
+        "brands": [
+          "BMW"
+        ]
+      }
+    ],
+    "entryPoints": [
+      {
+        "name": "iabadia_m_arcade",
+        "uuid": "3132366a-5d7b-4f4e-977c-61e774d8dd5a",
+        "textId": "SID_MArcade_TITLE",
+        "insertionStateId": 20974,
+        "insertionFocusId": 2,
+        "insertionMode": "INSERT_BELOW",
+        "insertionOrder": 0,
+        "insertionPriority": 0,
+        "previewType": "NONE",
+        "bookmarkable": true,
+        "private": null,
+        "appearance": "DEFAULT",
+        "isGroupHeader": false,
+        "insertionGroup": 0,
+        "icon": "iabadia_m_arcade_icon.png"
+      }
+    ]
+  }
+}

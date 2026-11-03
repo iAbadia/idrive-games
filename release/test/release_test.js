@@ -131,21 +131,35 @@ test('the build tree holds a submodule at its recorded commit; one its checkout 
     assert.throws(() => exportHead(main), /git archive 1{40} in third_party[\\/]lib failed/);
 });
 
-test('2048 catalog declares its renderer dependency and ID7 compatibility', () => {
+test('M Arcade is the only releasable app and retains renderer/ID7 metadata', () => {
     const all = components();
-    assert.strictEqual(all.length, 6);
-    const app = all.find(c => c.id === 'iabadia_2048');
-    assert.strictEqual(app.id, 'iabadia_2048');
-    assert.deepStrictEqual(app.mguHmi, ['ID7']);
-    assert.deepStrictEqual(app.requires, { 'mgu-render': '0.6.9' });
-    assert.strictEqual(app.uninstallable, true);
+    assert.deepStrictEqual(all.map(c=>c.id), ['iabadia_m_arcade']);
+    const arcade = all[0];
+    assert.strictEqual(arcade.title, 'M Arcade');
+    assert.deepStrictEqual(arcade.mguHmi, ['ID7']);
+    assert.deepStrictEqual(arcade.requires, {'mgu-render':'0.6.9'});
+    assert.strictEqual(arcade.uninstallable, true);
+});
+
+test('standalone sources stay available without release registration', () => {
+    const root=path.resolve(__dirname,'../..');
+    for(const id of ['2048','minesweeper','snake','tetris','invaders','breakout']) {
+        const dir=path.join(root,'apps','iabadia_'+id);
+        assert(fs.existsSync(path.join(dir,'src','game.js')));
+        assert(fs.existsSync(path.join(dir,'legacy-release.json')));
+        assert(!fs.existsSync(path.join(dir,'release.json')));
+    }
+    const pkg=JSON.parse(fs.readFileSync(path.join(root,'package.json'),'utf8'));
+    assert.strictEqual(pkg.scripts.build,'node apps/iabadia_m_arcade/tools/build.js');
+    assert(pkg.scripts['build:legacy']);
 });
 
 let failed = 0;
-test('the Store branch manifest lists every game with matching source metadata', () => {
+test('the Store branch exposes only M Arcade with matching release metadata', () => {
     const root = path.resolve(__dirname, '../..');
     const repo = JSON.parse(fs.readFileSync(path.join(root, 'mgu-repo.json'), 'utf8'));
     assert.strictEqual(repo.schema, 1);
+    assert.deepStrictEqual(repo.components.map(c=>c.id), ['iabadia_m_arcade']);
     const apps = components().filter((c) => c.kind === 'app');
     assert.deepStrictEqual(repo.components.map((c) => c.id).sort(), apps.map((c) => c.id).sort());
     repo.components.forEach((c) => {

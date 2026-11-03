@@ -3,8 +3,9 @@
 const fs=require('fs'),path=require('path'),zlib=require('zlib');
 const root=path.join(__dirname,'..'),budget=512*1024,unpackedBudget=1024*1024;
 let failed=false;
-for(const id of fs.readdirSync(path.join(root,'apps'))){
- const dir=path.join(root,'apps',id),manifestPath=path.join(dir,'mgu-app.json');if(!fs.existsSync(manifestPath))continue;
+// Check the same active release targets that npm run check/publish discover.
+for(const component of require('../release/release.js').components(root).filter(c=>c.kind==='app'&&c.build==='unit')){
+ const id=component.id,dir=path.join(root,component.dir),manifestPath=path.join(dir,'mgu-app.json');
  const m=JSON.parse(fs.readFileSync(manifestPath,'utf8')),file=path.join(dir,id+'@'+m.version+'.src.tgz');
  if(!fs.existsSync(file))throw Error('Run npm run build first: '+id);
  const bytes=fs.statSync(file).size,tar=zlib.gunzipSync(fs.readFileSync(file));let unpacked=0;

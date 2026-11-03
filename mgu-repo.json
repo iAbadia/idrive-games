@@ -2,87 +2,12 @@
   "schema": 1,
   "components": [
     {
-      "id": "iabadia_2048",
+      "id": "iabadia_m_arcade",
       "kind": "app",
-      "path": "apps/iabadia_2048",
+      "path": "apps/iabadia_m_arcade",
       "build": "unit",
-      "title": "2048",
-      "description": "2048 with animated tiles, controller menus and arcade high scores",
-      "requires": {
-        "mgu-render": "0.6.9"
-      },
-      "uninstallable": true,
-      "mguHmi": [
-        "ID7"
-      ]
-    },
-    {
-      "id": "iabadia_minesweeper",
-      "kind": "app",
-      "path": "apps/iabadia_minesweeper",
-      "build": "unit",
-      "title": "Minesweeper",
-      "description": "Classic Minesweeper with controller input, safe first reveals and saved best times",
-      "requires": {
-        "mgu-render": "0.6.9"
-      },
-      "uninstallable": true,
-      "mguHmi": [
-        "ID7"
-      ]
-    },
-    {
-      "id": "iabadia_snake",
-      "kind": "app",
-      "path": "apps/iabadia_snake",
-      "build": "unit",
-      "title": "Snake",
-      "description": "Classic Snake with three speeds, saved progress and named high scores",
-      "requires": {
-        "mgu-render": "0.6.9"
-      },
-      "uninstallable": true,
-      "mguHmi": [
-        "ID7"
-      ]
-    },
-    {
-      "id": "iabadia_tetris",
-      "kind": "app",
-      "path": "apps/iabadia_tetris",
-      "build": "unit",
-      "title": "Tetris",
-      "description": "Falling blocks with rotary movement, ghost pieces, seven-bag randomization and saved scores",
-      "requires": {
-        "mgu-render": "0.6.9"
-      },
-      "uninstallable": true,
-      "mguHmi": [
-        "ID7"
-      ]
-    },
-    {
-      "id": "iabadia_invaders",
-      "kind": "app",
-      "path": "apps/iabadia_invaders",
-      "build": "unit",
-      "title": "Space Invaders",
-      "description": "Arcade invaders with rotary movement, automatic firing, shields, waves and saved high scores",
-      "requires": {
-        "mgu-render": "0.6.9"
-      },
-      "uninstallable": true,
-      "mguHmi": [
-        "ID7"
-      ]
-    },
-    {
-      "id": "iabadia_breakout",
-      "kind": "app",
-      "path": "apps/iabadia_breakout",
-      "build": "unit",
-      "title": "Breakout",
-      "description": "Rotary paddle control, angled ball bounces, brick waves and saved arcade scores",
+      "title": "M Arcade",
+      "description": "Six games in one controller-first arcade, with shared menus, progress and named records",
       "requires": {
         "mgu-render": "0.6.9"
       },

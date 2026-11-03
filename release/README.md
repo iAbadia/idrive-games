@@ -31,7 +31,7 @@ without GitHub's API and its rate limit, and the asset's API URL while it
 is private. `publish` lists the entries it carries over the same way, and
 publishes the catalog when only that changed.
 
-The 2048 app requires `mgu-render` 0.6.9 from the existing mgu-store source.
+M Arcade requires `mgu-render` 0.6.9 from the existing mgu-store source.
 The head unit links source packages against its own SDK; no BMW SDK is shipped.
 
 The catalog is not signed: the Store fetches it over HTTPS and checks each
@@ -41,6 +41,12 @@ artifact's size and sha256 against it.
 validation. It runs tests and reproducibility checks before publishing with
 the workflow's short-lived `GITHUB_TOKEN`; no personal token is stored.
 Normal pushes only run build checks and do not publish game releases.
+
+## Active app and legacy snapshots
+
+This branch registers only `iabadia_m_arcade`. `mgu-repo.json` exposes one Store entry, and only M Arcade has an active `release.json`. The six standalone configurations are retained as `legacy-release.json`, which release discovery ignores. Do not restore those markers for new game development: add modules to M Arcade instead.
+
+The publisher reconciles its catalog with registered components, so a future authorized catalog publish drops retired standalone entries. Old release assets, source code, installed apps and their private saves are not deleted by this change. See [legacy policy](../docs/LEGACY_GAMES.md).
 
 ## License
 

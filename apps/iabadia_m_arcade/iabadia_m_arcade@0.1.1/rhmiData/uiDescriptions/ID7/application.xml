@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application>
+<container id="1" type="state" widget="LT_State_A4A_WelcomeApp"><layoutGroup id="1010" name="Titlebar"><component id="110" type="title"><property id="2" value="1"/></component></layoutGroup><layoutGroup id="1011" name="List"><component id="120" type="label" widget="LT_Label_1Row"><property id="2" value="1"/><property id="3" value="0"/></component></layoutGroup></container>
+<container id="2" type="state" widget="LT_State_A4A_WelcomeApp"><layoutGroup id="1020" name="Titlebar"><component id="210" type="title"><property id="2" value="1"/></component></layoutGroup><layoutGroup id="1021" name="List"><component id="220" type="label" widget="LT_Label_1Row"><property id="2" value="1"/><property id="3" value="0"/></component></layoutGroup></container>
+<container id="3" type="state" widget="LT_State_A4A_WelcomeApp"><layoutGroup id="1030" name="Titlebar"><component id="310" type="title"><property id="2" value="1"/></component></layoutGroup><layoutGroup id="1031" name="List"><component id="320" type="label" widget="LT_Label_1Row"><property id="2" value="1"/><property id="3" value="0"/></component></layoutGroup></container>
+<container id="4" type="state" widget="LT_State_A4A_WelcomeApp"><layoutGroup id="1040" name="Titlebar"><component id="410" type="title"><property id="2" value="1"/></component></layoutGroup><layoutGroup id="1041" name="List"><component id="420" type="label" widget="LT_Label_1Row"><property id="2" value="1"/><property id="3" value="0"/></component></layoutGroup></container>
+</application>
