@@ -24,13 +24,23 @@ class AppMArcade extends OnlineApp {
         this.depth = 1;
         this.navigating = false;
         this.visibleStates = new Set();
+        this.hostReady = false;
+        this.pendingEntryUuid = null;
+        this.startedAt = new Date().toISOString();
+        this.startupEvents = [];
         this.saveDir = path.join(__dirname, '..', '..', 'data', 'm-arcade');
+        this.store = new storage.Saves(this.saveDir);
+        this.trace('construct');
         this.icons = loadIcons(
             path.join(__dirname, '..', 'config', 'icons'),
             games,
+            (id, error) => {
+                this.trace('icon unavailable: ' + id, error);
+                logger.warn('M Arcade icon ' + id + ': ' + error.message);
+            },
         );
         this.session = new Session({
-            store: new storage.Saves(this.saveDir),
+            store: this.store,
             change: () => this.render(),
             exit: () => this.exitApp(),
         });
@@ -40,6 +50,7 @@ class AppMArcade extends OnlineApp {
         });
         this.gpu.fps(30);
         this.gpu.on('ready', (screen, info) => {
+            this.trace('renderer connected');
             this.ready = !!(
                 info &&
                 info.controller &&
@@ -81,11 +92,12 @@ class AppMArcade extends OnlineApp {
             this.focused = false;
             this.updateVisibility();
         });
-        this.on('initialized', () =>
-            this.initialize().catch((e) =>
-                logger.error('M Arcade init: ' + e.message),
-            ),
-        );
+        this.on('initialized', () => {
+            if (!this.initialization)
+                this.initialization = Promise.resolve()
+                    .then(() => this.initialize())
+                    .catch((e) => this.startupFailure('initialize', e));
+        });
         this.on('shutdown', () => this.shutdown());
         this.on('error', (e) => logger.warn('M Arcade: ' + e.message));
         this.on('entryPointExecute', (uuid) => this.open(uuid));
@@ -96,8 +108,35 @@ class AppMArcade extends OnlineApp {
             }
         });
     }
+    trace(stage, error) {
+        const event = { time: new Date().toISOString(), stage };
+        if (error) event.detail = String(error.stack || error.message || error).slice(0, 2000);
+        this.startupEvents.push(event);
+        this.startupEvents = this.startupEvents.slice(-32);
+        logger.info('M Arcade: ' + stage);
+        try {
+            this.store.write(path.join(this.store.dir, 'startup.json'), {
+                startedAt: this.startedAt,
+                events: this.startupEvents,
+            });
+        } catch (e) {
+            // Diagnostics must never prevent launch, including on read-only storage.
+            logger.warn('M Arcade startup trace: ' + e.message);
+        }
+    }
+    startupFailure(stage, error) {
+        this.trace(stage + ' failed', error);
+        this.status('M Arcade could not start: ' + error.message);
+        logger.error('M Arcade ' + stage + ': ' + (error.stack || error.message));
+    }
     initialize() {
+        this.trace('initialize');
         if (!this.rhmiApplication) return this.initialized();
+        const data = this.getVisibilityData && this.getVisibilityData();
+        const foreground = [
+            'ENTRY_POINT', 'LUM', 'BOOKMARK', 'START_WIDGET',
+            'TRIGGER_HMI', 'SPEECH_COMMAND',
+        ].indexOf((data && data.reason) || this.startReason) >= 0;
         this.state = this.rhmiApplication.getByName(STATE);
         if (!this.state) throw new Error('M Arcade state missing');
         this.states = STATES.map((name) =>
@@ -147,6 +186,7 @@ class AppMArcade extends OnlineApp {
                 this.updateVisibility();
             }
         });
+        this.trace('native resources');
         return Promise.all(this.states.map((s) => s.updateResources()))
             .then(() => {
                 const descriptions =
@@ -158,61 +198,77 @@ class AppMArcade extends OnlineApp {
                 );
                 if (!ep) throw new Error('M Arcade entry point missing');
                 const d = ep.getDescription();
+                this.trace('entry point registration');
                 return ep
                     .init()
                     .then(() =>
                         this.rhmiApplication.mapEntryState(d.uuid, this.state),
                     )
-                    .then(() => ep.entryPoint.setText(d.textId))
-                    .then(() => ep.entryPoint.setIcon(d.icon))
+                    .then(() => {
+                        this.entryUuid = d.uuid;
+                        // Cosmetic metadata failures must not disable the launcher.
+                        return Promise.resolve()
+                            .then(() => ep.entryPoint.setText(d.textId))
+                            .catch((e) => logger.warn('M Arcade entry text: ' + e.message));
+                    })
+                    .then(() => Promise.resolve()
+                        .then(() => ep.entryPoint.setIcon(d.icon))
+                        .catch((e) => {
+                            this.trace('entry icon unavailable', e);
+                            logger.warn('M Arcade entry icon: ' + e.message);
+                        }))
                     .then(() => ep.setAvailability('ENABLED'));
             })
             .then(() => {
-                const data = this.getVisibilityData && this.getVisibilityData();
-                if (
-                    [
-                        'ENTRY_POINT',
-                        'LUM',
-                        'BOOKMARK',
-                        'START_WIDGET',
-                        'TRIGGER_HMI',
-                        'SPEECH_COMMAND',
-                    ].indexOf((data && data.reason) || this.startReason) >= 0
-                )
-                    this.registerActive();
-                return this.initialized();
+                this.trace('SDK initialization');
+                return Promise.resolve()
+                    .then(() => foreground && this.registerActive())
+                    .catch((e) => logger.warn('M Arcade activity: ' + e.message))
+                    .then(() => this.initialized());
             })
             .then(() => {
+                this.trace('waiting for renderer');
                 this.gpu.connect();
+                this.hostReady = true;
                 this.keepalive = setInterval(() => {
                     if (this.visible && this.ready) {
                         this.session.advance();
                         this.render();
                     }
                 }, 1000);
-                const uuid =
-                    this.getLastExecutedEntryPointUuid &&
+                const lastUuid = this.getLastExecutedEntryPointUuid &&
                     this.getLastExecutedEntryPointUuid();
+                // A cold foreground start may have no cached SDK UUID yet.
+                const uuid = this.pendingEntryUuid ||
+                    (foreground && (lastUuid || this.entryUuid));
+                this.pendingEntryUuid = null;
                 if (uuid) return this.open(uuid);
             });
     }
     status(text) {
-        const c =
-            this.rhmiApplication &&
-            this.rhmiApplication.getByName('gameStatus');
-        if (c)
-            Promise.resolve(c.setValue(0, 'Text', text, 'Text')).catch((e) =>
-                logger.warn(e.message),
-            );
+        return Promise.resolve().then(() => {
+            const c = this.rhmiApplication &&
+                this.rhmiApplication.getByName('gameStatus');
+            return c && c.setValue(0, 'Text', text, 'Text');
+        }).catch((e) => logger.warn(e.message));
     }
     open(uuid) {
-        if (!this.rhmiApplication || this.ending) return Promise.resolve();
-        this.visible = true;
-        this.focused = true;
-        this.updateVisibility();
-        return Promise.resolve(this.rhmiApplication.openEntryState(uuid)).catch(
-            (e) => logger.warn(e.message),
-        );
+        if (!uuid || this.ending) return Promise.resolve();
+        if (!this.hostReady) {
+            this.pendingEntryUuid = uuid;
+            this.trace('launch queued');
+            return Promise.resolve();
+        }
+        this.trace('open entry state');
+        return Promise.resolve()
+            .then(() => this.rhmiApplication.openEntryState(uuid))
+            .then(() => {
+                this.visible = true;
+                this.focused = true;
+                this.updateVisibility();
+                this.trace('entry state opened');
+            })
+            .catch((e) => this.startupFailure('open entry state', e));
     }
     updateVisibility() {
         if (this.ending) return;
@@ -319,4 +375,5 @@ class AppMArcade extends OnlineApp {
     }
 }
 const app = new AppMArcade();
-app.start().catch((e) => logger.error('M Arcade start: ' + e.message));
+Promise.resolve().then(() => app.start())
+    .catch((e) => app.startupFailure('start', e));

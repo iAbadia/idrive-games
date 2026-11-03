@@ -27,7 +27,7 @@ apps/iabadia_m_arcade/
       board.js                board-only drawing; no menus or advancement
     kit/                      one renderer client, drawing kit and font set
   package-src/                generated flat modules for the existing unit linker
-  iabadia_m_arcade@0.1.2/      native resources, licenses and packaged icons
+  iabadia_m_arcade@0.1.3/      native resources, licenses and packaged icons
   assets/                     canonical launcher/game PNGs
   tools/                      build, preview, tests and offline import
 ```

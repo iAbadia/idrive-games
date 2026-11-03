@@ -23,13 +23,19 @@ async function until(fn) {
     throw new Error('Timed out');
 }
 
-async function lifecycle() {
+async function lifecycle(options) {
+    options = options || {};
+    const warnings = [], errors = [], statusText = [], entries = [];
+    const logger = { info() {}, warn(m) { warnings.push(m); }, error(m) { errors.push(m); } };
+    let available = false, mapped = false, releaseResources;
+    const resources = options.early ? new Promise((r) => { releaseResources = r; }) : Promise.resolve();
     let app, gpu;
     const states = Array.from({ length: 4 }, () => new EventEmitter());
-    states.forEach((s) => (s.updateResources = () => Promise.resolve()));
+    states.forEach((s) => (s.updateResources = () => resources));
     const rhmi = new EventEmitter(),
         status = {
-            setValue() {
+            setValue(i, type, value) {
+                statusText.push(value);
                 return Promise.resolve();
             },
         },
@@ -43,8 +49,14 @@ async function lifecycle() {
     ];
     rhmi.getByName = (n) =>
         n === 'gameStatus' ? status : states[names.indexOf(n)];
-    rhmi.mapEntryState = () => Promise.resolve();
-    rhmi.openEntryState = () => Promise.resolve();
+    rhmi.mapEntryState = () => { mapped = true; return Promise.resolve(); };
+    rhmi.openEntryState = (uuid) => {
+        assert(mapped && app._initialized, 'entry must wait for native initialization');
+        entries.push(uuid);
+        return Promise.resolve();
+    };
+    if (options.missingState)
+        rhmi.getByName = (n) => n === 'gameStatus' ? status : undefined;
     rhmi.openState = (n) => {
         opened.push(n);
         return Promise.resolve();
@@ -61,10 +73,10 @@ async function lifecycle() {
     const ep = {
         getDescription: () => d,
         init: () => Promise.resolve(),
-        setAvailability: () => Promise.resolve(),
+        setAvailability: () => { available = true; return Promise.resolve(); },
         entryPoint: {
             setText: () => Promise.resolve(),
-            setIcon: () => Promise.resolve(),
+            setIcon: () => options.badIcon ? Promise.reject(new Error('icon unavailable')) : Promise.resolve(),
         },
     };
     class SDK extends EventEmitter {
@@ -73,11 +85,13 @@ async function lifecycle() {
             app = this;
             this.rhmiApplication = rhmi;
             this.appDescription = { application: { entryPoints: [d] } };
-            this.startReason = 'ENTRY_POINT';
+            this.startReason = options.background ? 'BACKGROUND' : 'ENTRY_POINT';
+            if (options.noLast) this.getLastExecutedEntryPointUuid = undefined;
             this._appStatusService = {};
         }
         start() {
             this.emit('initialized');
+            if (options.early) this.emit('entryPointExecute', 'entry');
             return Promise.resolve();
         }
         initialized() {
@@ -147,12 +161,16 @@ async function lifecycle() {
         ),
         require(n) {
             if (n.includes('OnlineApp')) return SDK;
-            if (n.includes('logging')) return { getSDKLogger: () => log };
+            if (n.includes('logging')) return { getSDKLogger: () => logger };
             if (n === './core/saves.js')
                 return {
                     Saves: class extends Saves {
                         constructor() {
                             super(tmp);
+                        }
+                        write(file, value) {
+                            if (options.readOnly) throw new Error('read-only storage');
+                            return super.write(file, value);
                         }
                     },
                 };
@@ -169,7 +187,31 @@ async function lifecycle() {
         process: { exit() {} },
     });
     try {
+        if (options.early) {
+            await later();
+            assert.equal(entries.length, 0, 'early launch must be queued');
+            releaseResources();
+        }
+        if (options.missingState) {
+            await until(() => errors.length > 0);
+            assert(!gpu.connected);
+            await later();
+            assert(statusText.some((text) => text.includes('state missing')));
+            const diagnostic = JSON.parse(fs.readFileSync(path.join(tmp, 'startup.json'), 'utf8'));
+            assert(diagnostic.events.some((e) => e.detail && e.detail.includes('state missing')));
+            return;
+        }
         await until(() => gpu.connected);
+        await app.initialization;
+        assert(available);
+        if (options.readOnly) assert(warnings.some((m) => m.includes('read-only storage')));
+        else {
+            const diagnostic = JSON.parse(fs.readFileSync(path.join(tmp, 'startup.json'), 'utf8'));
+            assert(diagnostic.events.some((e) => e.stage === 'waiting for renderer'));
+            assert(diagnostic.events.length <= 32);
+        }
+        assert.equal(entries.length, options.background && !options.early ? 0 : 1);
+        if (options.badIcon) assert(warnings.some((m) => m.includes('icon unavailable')));
         gpu.emit(
             'ready',
             {},
@@ -179,7 +221,12 @@ async function lifecycle() {
                 embedBox: { x: 100, y: 100, w: 1280, h: 480 },
             },
         );
+        if (options.background && !options.early) {
+            assert(!gpu.grabbed && !gpu.shown, 'background startup must not take over the HMI');
+            await app.open('entry');
+        }
         assert(gpu.grabbed && gpu.shown && gpu.words);
+        if (options.startupOnly) return;
         assert.equal(app.session.route, 'library');
         assert.equal(app.depth, 1);
         app.session.activate('breakout');
@@ -238,7 +285,26 @@ async function lifecycle() {
         app.emit('shutdown');
         await later();
         assert(gpu.closed);
+        assert.equal(errors.length, options.missingState ? 1 : 0, errors.join('\n'));
     }
+}
+function iconFailures() {
+    const { loadIcons } = require('../src/ui/icons.js');
+    const dir = fs.mkdtempSync(path.join(require('os').tmpdir(), 'm-arcade-icons-'));
+    const definitions = [
+        { id: 'good', icon: 'good.png' },
+        { id: 'corrupt', icon: 'corrupt.png' },
+        { id: 'missing', icon: 'missing.png' },
+    ];
+    const games = require('../src/core/registry.js').games;
+    fs.copyFileSync(path.join(ROOT, 'assets/games', games[0].icon), path.join(dir, 'good.png'));
+    fs.writeFileSync(path.join(dir, 'corrupt.png'), 'bad');
+    assert.throws(() => loadIcons(dir, definitions));
+    const failures = [];
+    const icons = loadIcons(dir, definitions, (id) => failures.push(id));
+    assert.deepEqual(Object.keys(icons), ['good']);
+    assert.deepEqual(failures, ['corrupt', 'missing']);
+    console.log('ok damaged/missing artwork is optional at runtime and remains a build error');
 }
 function message(type, payload) {
     const b = Buffer.alloc(8 + payload.length);
@@ -372,6 +438,13 @@ function linked() {
     const members = link.untar(fs.readFileSync(out)),
         bundle = members.find((v) => v.name === 'javascript/app.js');
     assert(bundle);
+    // Run the installed layout, not icons borrowed from the checkout.
+    members.forEach((member) => {
+        assert(!member.name.split('/').includes('..') && !path.isAbsolute(member.name));
+        const target = path.join(temp, 'installed', member.name);
+        fs.mkdirSync(path.dirname(target), { recursive: true });
+        fs.writeFileSync(target, member.data);
+    });
     const global = {};
     vm.runInNewContext(
         bundle.data.toString('utf8'),
@@ -384,11 +457,7 @@ function linked() {
             Uint32Array,
             Float32Array,
             ArrayBuffer,
-            __dirname: path.join(
-                ROOT,
-                require('../mgu-app.json').tree,
-                'javascript',
-            ),
+            __dirname: path.join(temp, 'installed', 'javascript'),
             setTimeout,
             clearTimeout,
             setInterval,
@@ -406,6 +475,14 @@ function linked() {
     );
 }
 (async () => {
+    await lifecycle({ noLast: true, startupOnly: true });
+    await lifecycle({ early: true, background: true, startupOnly: true });
+    await lifecycle({ badIcon: true, startupOnly: true });
+    await lifecycle({ background: true, startupOnly: true });
+    await lifecycle({ missingState: true });
+    await lifecycle({ readOnly: true, startupOnly: true });
+    iconFailures();
+    console.log('ok cold launch without cached UUID, early launch, icon failure, background start and initialization failure');
     await lifecycle();
     await wire();
     linked();

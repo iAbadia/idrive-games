@@ -4,11 +4,16 @@ const fs = require('fs'),
     path = require('path'),
     { decode } = require('./png.js'),
     { makeImage } = require('../kit/kit_record.js');
-function loadIcons(dir, definitions) {
+function loadIcons(dir, definitions, onError) {
     const images = {};
     definitions.forEach((def) => {
-        const p = decode(fs.readFileSync(path.join(dir, def.icon)));
-        images[def.id] = makeImage(p.w, p.h, p.data);
+        try {
+            const p = decode(fs.readFileSync(path.join(dir, def.icon)));
+            images[def.id] = makeImage(p.w, p.h, p.data);
+        } catch (error) {
+            if (!onError) throw error; // Build and preview remain strict.
+            onError(def.id, error);
+        }
     });
     return images;
 }

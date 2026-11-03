@@ -39,3 +39,9 @@ With M Arcade stopped, transfer the generated `games/` files into its own `data/
 ## Development
 
 See [the architecture and adding-game guide](../../docs/architecture/M_ARCADE.md). Canonical code lives in `src/`; `tools/build.js` generates flat `package-src/` aliases for the head unit linker. Run `npm test`, `npm run build` and `npm run size` from the repository root. No runtime npm dependencies or BMW SDK files are bundled.
+
+## Startup diagnostics
+
+M Arcade records the latest process startup and launch stages in `data/m-arcade/startup.json` within its own app home. The trace is limited to 32 entries and includes failure stacks; it contains no controller input or game saves. With authorized head-unit file access, retrieve this file and the `oapcontroller` journal after a failed launch. The Store phone page's updater logs do not include this trace.
+
+Missing artwork leaves the game titles usable. If initialization reaches the native screen and then fails, that screen displays the error. A process that fails before the app code runs still requires the head unit's runtime journal.
