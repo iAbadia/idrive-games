@@ -1,0 +1,4 @@
+interface:
+  display_name: "M Arcade Icons"
+  short_description: "Create consistent M Arcade game and launcher icons"
+  default_prompt: "Use $m-arcade-icons to prepare a game icon for M Arcade."

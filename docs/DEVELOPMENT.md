@@ -33,3 +33,7 @@ Run `npm run build` then `npm run size`. See [the measured comparison and budget
 | Tetris | `npm run preview:tetris` | http://127.0.0.1:2052 |
 
 The [gallery media guide](media/README.md) covers screenshots and compact gameplay GIFs.
+
+## M Arcade design
+
+The [M Arcade architecture proposal](architecture/M_ARCADE.md) describes the shared shell, game contract, persistence, packaging and migration plan. This branch does not replace the released standalone apps. New collection icons follow the repository [M Arcade Icons skill](../.agents/skills/m-arcade-icons/SKILL.md).

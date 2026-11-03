@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="tile" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#182333"/><stop offset=".55" stop-color="#101621"/><stop offset="1" stop-color="#080D14"/>
+    </linearGradient>
+    <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#A7E8FF"/><stop offset=".4" stop-color="#26C9F0"/><stop offset="1" stop-color="#157493"/>
+    </linearGradient>
+    <clipPath id="inside"><rect x="112" y="112" width="800" height="800" rx="152"/></clipPath>
+  </defs>
+  <rect x="88" y="88" width="848" height="848" rx="176" fill="url(#rim)"/>
+  <rect x="112" y="112" width="800" height="800" rx="152" fill="url(#tile)"/>
+  <path d="M264 124H760" stroke="#FFFFFF" stroke-opacity=".18" stroke-width="5" stroke-linecap="round"/>
+  <!-- Add the game symbol inside this clipped group. Change rim stops to the game accent. -->
+  <g clip-path="url(#inside)" id="symbol"/>
+</svg>
