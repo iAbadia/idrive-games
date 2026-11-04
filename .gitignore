@@ -13,3 +13,4 @@ release/published/
 data/
 coverage/
 .DS_Store
+/m-arcade-startup*.json
