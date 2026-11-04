@@ -8,7 +8,7 @@
     "node": ">=22"
   },
   "scripts": {
-    "test": "node apps/iabadia_2048/tools/test.js && node apps/iabadia_2048/tools/test_app.js && node apps/iabadia_minesweeper/tools/test.js && node apps/iabadia_minesweeper/tools/test_app.js && node release/test/release_test.js && node apps/iabadia_snake/tools/test.js && node apps/iabadia_snake/tools/test_app.js && node apps/iabadia_tetris/tools/test.js && node apps/iabadia_tetris/tools/test_app.js && node apps/iabadia_invaders/tools/test.js && node apps/iabadia_invaders/tools/test_app.js && node apps/iabadia_breakout/tools/test.js && node apps/iabadia_breakout/tools/test_app.js && node apps/iabadia_m_arcade/tools/test.js && node apps/iabadia_m_arcade/tools/test_app.js",
+    "test": "node apps/iabadia_2048/tools/test.js && node apps/iabadia_2048/tools/test_app.js && node apps/iabadia_minesweeper/tools/test.js && node apps/iabadia_minesweeper/tools/test_app.js && node release/test/release_test.js && node apps/iabadia_snake/tools/test.js && node apps/iabadia_snake/tools/test_app.js && node apps/iabadia_tetris/tools/test.js && node apps/iabadia_tetris/tools/test_app.js && node apps/iabadia_invaders/tools/test.js && node apps/iabadia_invaders/tools/test_app.js && node apps/iabadia_breakout/tools/test.js && node apps/iabadia_breakout/tools/test_app.js && node apps/iabadia_m_arcade/tools/test.js && node apps/iabadia_m_arcade/tools/test_app.js && node tools/test_collect_startup.js",
     "build": "node apps/iabadia_m_arcade/tools/build.js",
     "preview": "node apps/iabadia_m_arcade/tools/serve.js",
     "check": "node release/release.js check",

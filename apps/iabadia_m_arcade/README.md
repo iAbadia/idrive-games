@@ -45,3 +45,11 @@ See [the architecture and adding-game guide](../../docs/architecture/M_ARCADE.md
 M Arcade records the latest process startup and launch stages in `data/m-arcade/startup.json` within its own app home. The trace is limited to 32 entries and includes failure stacks; it contains no controller input or game saves. With authorized head-unit file access, retrieve this file and the `oapcontroller` journal after a failed launch. The Store phone page's updater logs do not include this trace.
 
 Missing artwork leaves the game titles usable. If initialization reaches the native screen and then fails, that screen displays the error. A process that fails before the app code runs still requires the head unit's runtime journal.
+
+After a failed launch, use a laptop's existing SSH connection to collect a report (no app update required). From this repository in PowerShell:
+
+```powershell
+Get-Content -Raw .\tools\collect_startup.js | ssh <your-existing-SSH-destination> node - | Set-Content -Encoding utf8 .\m-arcade-startup.json
+```
+
+Keep your usual SSH identity/port options if needed. Run within 15 minutes of the failed launch. The collector reads the installed version and startup trace, checks the installed JavaScript syntax without running it, queries Renderer status, and collects matching runtime errors. It does not restart services or change car files. Common credentials and VINs are redacted; review the report before sharing it. Missing traces and inaccessible logs are reported explicitly.
